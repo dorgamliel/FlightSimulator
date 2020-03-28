@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="FlightSimulatorApp.UserControls.Sliders"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightSimulatorApp.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="t_Aileron" Text="Aileron" Grid.Column="1" HorizontalAlignment="Center" Margin="54.333,5,55.667,127" Grid.RowSpan="2" Width="38"/>
+        <TextBlock Name="t_Throttle" Text="Throttle" Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="-25,83.333,133.667,25" Grid.ColumnSpan="2" Height="19" Width="53">
+            <TextBlock.RenderTransform>
+                <RotateTransform Angle="-90"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Slider Name="s_Aileron" Value="0" Minimum="-1" Maximum="1" Grid.Column="1" Margin="0.333,20,29,127" TickPlacement="BottomRight" TickFrequency="0.1" Grid.ColumnSpan="2" Grid.RowSpan="2"  />
+        <Slider Name="s_Throttle" Value ="0" Orientation="Vertical" Minimum="0" Maximum="1" HorizontalAlignment="Center" Margin="-10,52,129.667,3"  TickPlacement="BottomRight" TickFrequency="0.1" Width="42" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+    </Grid>
+
+</UserControl>

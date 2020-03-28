@@ -9,17 +9,17 @@
         Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="198*" />
-            <ColumnDefinition Width="198*" />
-            <ColumnDefinition Width="198*" />
-            <ColumnDefinition Width="136*" />
-            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1.3*" />
         </Grid.RowDefinitions>
         <m:Map CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" Center="47.640,-122.125" ZoomLevel="10" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="0,0,0.667,0">
             <m:MapPolygon Fill="Blue" Stroke="Green" StrokeThickness="5" 
@@ -46,14 +46,15 @@
             <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
             <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
         </StackPanel>
-        <Views:Joystick x:Name="JoyStick" Grid.Row="3" Grid.Column="3" Margin="50.333,0,-0.333,0" RenderTransformOrigin="-0.699,0.932" Grid.ColumnSpan="2"/>
-        <StackPanel Grid.Row="2" Grid.Column="3" Margin="73.333,86,-0.333,0" Grid.ColumnSpan="2">
+        <Views:Joystick x:Name="JoyStick" Grid.Row="3" Grid.Column="3" Margin="51,1,19.333,8.667" Grid.ColumnSpan="2"/>
+        <!--<StackPanel Grid.Row="2" Grid.Column="3" Margin="73.333,86,-0.333,0" Grid.ColumnSpan="2">
             <TextBlock FontSize="15" HorizontalAlignment="Center">Aileron:</TextBlock>
             <Slider Maximum="1.0" Minimum="-1.0" TickFrequency="1" />
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="3" Margin="0.333,0,67.667,0">
             <TextBlock FontSize="15" HorizontalAlignment="Center" >Throttle:</TextBlock>
             <Slider Orientation="Vertical" Maximum="1.0" Minimum="-1.0" Height="130" HorizontalAlignment="Center" Margin="0"/>
-        </StackPanel>
+        </StackPanel>-->
+        <Views:Sliders  Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,80,0.333,0.667" Grid.RowSpan="2" />
     </Grid>
 </Window>
