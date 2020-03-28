@@ -1,20 +1,59 @@
-﻿<Window x:Class="FlightSimulatorApp.MainWindow"
+﻿<Window x:Class="FlightSimulatorApp.MainWindow1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FlightSimulatorApp.UserControls"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:Views="clr-namespace:FlightSimulatorApp.UserControls"
         mc:Ignorable="d"
-        Title="FlightSimulator" Height="600" Width="800">
-    <Grid RenderTransformOrigin="0.501,0.443">
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="198*" />
+            <ColumnDefinition Width="198*" />
+            <ColumnDefinition Width="198*" />
+            <ColumnDefinition Width="136*" />
+            <ColumnDefinition Width="63*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <local:Joystick Grid.Row="1" Grid.Column="1" Margin="100,70,20,20"/>
+        <m:Map CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" Center="47.640,-122.125" ZoomLevel="10" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="0,0,0.667,0">
+            <m:MapPolygon Fill="Blue" Stroke="Green" StrokeThickness="5" 
+                          Locations="47.61,-122.1 47.67,-122.125 47.61,-122.15" 
+                          Opacity="0.7"/>
+        </m:Map>
+        <StackPanel Grid.Column="3" Grid.RowSpan="2" Margin="0,0,0,5">
+            <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Vertcal Speed:</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0.333,0,-0.333,10">
+            <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Vertcal Speed:</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
+        </StackPanel>
+        <Views:Joystick x:Name="JoyStick" Grid.Row="3" Grid.Column="3" Margin="50.333,0,-0.333,0" RenderTransformOrigin="-0.699,0.932" Grid.ColumnSpan="2"/>
+        <StackPanel Grid.Row="2" Grid.Column="3" Margin="73.333,86,-0.333,0" Grid.ColumnSpan="2">
+            <TextBlock FontSize="15" HorizontalAlignment="Center">Aileron:</TextBlock>
+            <Slider Maximum="1.0" Minimum="-1.0" TickFrequency="1" />
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="3" Margin="0.333,0,67.667,0">
+            <TextBlock FontSize="15" HorizontalAlignment="Center" >Throttle:</TextBlock>
+            <Slider Orientation="Vertical" Maximum="1.0" Minimum="-1.0" Height="130" HorizontalAlignment="Center" Margin="0"/>
+        </StackPanel>
     </Grid>
 </Window>
