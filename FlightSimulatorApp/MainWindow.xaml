@@ -28,7 +28,7 @@
         </m:Map>
         <StackPanel Grid.Column="3" Grid.RowSpan="2" Margin="0,0,0,5">
             <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Vertcal Speed:</TextBlock>
+            <TextBlock FontSize="10" Padding="10">Vertical Speed:</TextBlock>
             <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
             <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
             <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
