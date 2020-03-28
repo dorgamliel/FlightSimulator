@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace FlightSimulatorApp
 {
-    interface IFlightSimulator : INotifyPropertyChanged
+    interface ITelnetClient
     {
         //connection to simulator.
         void connect(string ip, int port);
         void disconnect();
-        void start();
-        void setThrottle(double val);
-        void setAileron(double val);
-        void setRudder(double val);
-        void setElevator(double val);
-
+        void write(string command);
+        string read();
     }
 }

@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ITelnetClient.cs" />
+    <Compile Include="MyFlightSimulator.cs" />
+    <Compile Include="MyTelnetClient.cs" />
     <Compile Include="UserControls\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
     </Compile>
