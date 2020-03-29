@@ -16,16 +16,16 @@ namespace FlightSimulatorApp
         void setAileron(double val);
         void setRudder(double val);
         void setElevator(double val);
-        double heading { get; set; }
-        double verticalSpeed { get; set; }
-        double groundSpeed { get; set; }
-        double airSpeed { get; set; }
+        double Heading { get; set; }
+        double VerticalSpeed { get; set; }
+        double GroundSpeed { get; set; }
+        double AirSpeed { get; set; }
         double GPSAlt { get; set; }
-        double roll { get; set; }
-        double pitch { get; set; }
+        double Roll { get; set; }
+        double Pitch { get; set; }
         double AltimeterAlt { get; set; }
-        double latitude { get; set; }
-        double longitude { get; set; }
+        double Latitude { get; set; }
+        double Longitude { get; set; }
 
 
     }

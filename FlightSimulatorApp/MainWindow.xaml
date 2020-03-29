@@ -24,7 +24,6 @@
         <m:Map CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" Center="47.640,-122.125" ZoomLevel="10" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="0,0,0.667,0">
             <m:MapLayer>
                 <Image Source="resources/plane.png" Stretch="UniformToFill" Margin="233,241,241,233">
-                    
                 </Image>
             </m:MapLayer>
         </m:Map>
