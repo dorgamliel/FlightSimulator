@@ -58,11 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DashboardViewModel.cs" />
-    <Compile Include="FlightSimulatorViewModel.cs" />
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View-Models\DashboardViewModel.cs" />
+    <Compile Include="View-Models\FlightSimulatorViewModel.cs" />
     <Compile Include="ITelnetClient.cs" />
-    <Compile Include="MapViewModel.cs" />
-    <Compile Include="MyControlsViewModel.cs" />
+    <Compile Include="View-Models\MapViewModel.cs" />
+    <Compile Include="View-Models\MyControlsViewModel.cs" />
     <Compile Include="MyFlightSimulator.cs" />
     <Compile Include="MyTelnetClient.cs" />
     <Compile Include="UserControls\Joystick.xaml.cs">
@@ -85,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Joystick.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,8 +130,6 @@
   <ItemGroup>
     <Resource Include="Resources\plane.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View-Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

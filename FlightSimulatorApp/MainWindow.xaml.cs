@@ -40,5 +40,21 @@ namespace FlightSimulatorApp
             ctrls.VM_rudder = controllers.JoyStick.knobPosition.X / (controllers.JoyStick.innerCircle.ActualHeight / 2);
             ctrls.VM_elevator = controllers.JoyStick.knobPosition.Y / (controllers.JoyStick.innerCircle.ActualWidth / 2);
         }
+
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkbox.IsChecked == false)
+            {
+                Settings lw = new Settings();
+                lw.ShowDialog();
+            }
+            else
+            {
+                if ((String)Connect.Content == "Disconnect")
+                    Connect.Content = "Connect";
+                else
+                    Connect.Content = "Disconnect";
+            }
+        }
     }
 }
