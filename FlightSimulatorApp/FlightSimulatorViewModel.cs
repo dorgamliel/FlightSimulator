@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -56,14 +57,6 @@ namespace FlightSimulatorApp
         {
             get { return simulator.AltimeterAlt; }
         }
-        public double VM_latitude
-        {
-            get { return simulator.Latitude; }
-        }
-        public double VM_longitude
-        {
-            get { return simulator.Longitude; }
-        }
         public double VM_throttle
         {
             set {
@@ -90,10 +83,6 @@ namespace FlightSimulatorApp
             {
                 simulator.setElevator(value);
             }
-        }
-        public Tuple<double, double> VM_Location
-        {
-            get { return new Tuple<double, double>(simulator.Longitude, simulator.Latitude); }
         }
 
         /*
