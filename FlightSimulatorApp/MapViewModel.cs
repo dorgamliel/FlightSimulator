@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -36,9 +37,9 @@ namespace FlightSimulatorApp
             get { return simulator.Longitude; }
         }
 
-        public Tuple<double, double> VM_Location
+        public Location VM_Location
         {
-            get { return new Tuple<double, double>(simulator.Longitude, simulator.Latitude); }
-        } 
+            get { return new Location(simulator.Longitude, simulator.Latitude); }
+        }
     }
 }
