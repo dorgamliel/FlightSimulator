@@ -27,19 +27,19 @@ namespace FlightSimulatorApp
         }
         public double VM_heading
         {
-            get { return simulator.heading; }
+            get { return simulator.Heading; }
         }
         public double VM_verticalSpeed
         {
-            get { return simulator.verticalSpeed; }
+            get { return simulator.VerticalSpeed; }
         }
         public double VM_groundSpeed
         {
-            get { return simulator.groundSpeed; }
+            get { return simulator.GroundSpeed; }
         }
         public double VM_airSpeed
         {
-            get { return simulator.airSpeed; }
+            get { return simulator.AirSpeed; }
         }
         public double VM_GPSAlt
         {
@@ -47,11 +47,11 @@ namespace FlightSimulatorApp
         }
         public double VM_roll
         {
-            get { return simulator.roll; }
+            get { return simulator.Roll; }
         }
         public double VM_pitch
         {
-            get { return simulator.pitch; }
+            get { return simulator.Pitch; }
         }
         public double VM_AltimeterAlt
         {
@@ -59,11 +59,11 @@ namespace FlightSimulatorApp
         }
         public double VM_latitude
         {
-            get { return simulator.latitude; }
+            get { return simulator.Latitude; }
         }
         public double VM_longitude
         {
-            get { return simulator.longitude; }
+            get { return simulator.Longitude; }
         }
     }
 }

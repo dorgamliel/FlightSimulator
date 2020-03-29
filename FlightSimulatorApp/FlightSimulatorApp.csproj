@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DashboardViewModel.cs" />
     <Compile Include="FlightSimulatorViewModel.cs" />
     <Compile Include="ITelnetClient.cs" />
     <Compile Include="MapViewModel.cs" />
@@ -121,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View-Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
