@@ -23,8 +23,8 @@
                 <RotateTransform Angle="-90"/>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <Slider Name="s_Aileron" Value="0" Minimum="-1" Maximum="1" Grid.Column="1" Margin="0.333,20,29,127" TickPlacement="BottomRight" TickFrequency="0.1" Grid.ColumnSpan="2" Grid.RowSpan="2"  />
-        <Slider Name="s_Throttle" Value ="0" Orientation="Vertical" Minimum="0" Maximum="1" HorizontalAlignment="Center" Margin="-10,52,129.667,3"  TickPlacement="BottomRight" TickFrequency="0.1" Width="42" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Slider Name="s_Aileron" Value="{Binding VM_aileron}" Minimum="-1" Maximum="1" Grid.Column="1" Margin="0.333,20,29,127" TickPlacement="BottomRight" TickFrequency="0.1" Grid.ColumnSpan="2" Grid.RowSpan="2"  />
+        <Slider Name="s_Throttle" Value ="{Binding VM_throttle}" Orientation="Vertical" Minimum="0" Maximum="1" HorizontalAlignment="Center" Margin="-10,52,129.667,3"  TickPlacement="BottomRight" TickFrequency="0.1" Width="42" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
     </Grid>
 
