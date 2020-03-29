@@ -22,6 +22,7 @@ namespace FlightSimulatorApp
     /// </summary>
     public partial class MainWindow1 : Window
     {
+        MyControlsViewModel ctrls;
         FlightSimulatorViewModel vm;
         MapViewModel mapVM;
         IFlightSimulator fs;
@@ -34,9 +35,10 @@ namespace FlightSimulatorApp
             vm = new FlightSimulatorViewModel(fs);
             DataContext = vm;
             mapVM = new MapViewModel(fs);
-            MyControlsViewModel controlVM = new MyControlsViewModel(fs);
             map.Center = mapVM.VM_Location;
-            DataContext = controlVM;
+            ctrls = new MyControlsViewModel(fs);
+            ctrls.VM_rudder = controllers.JoyStick.knobPosition.X / (controllers.JoyStick.innerCircle.ActualHeight / 2);
+            ctrls.VM_elevator = controllers.JoyStick.knobPosition.Y / (controllers.JoyStick.innerCircle.ActualWidth / 2);
         }
     }
 }
