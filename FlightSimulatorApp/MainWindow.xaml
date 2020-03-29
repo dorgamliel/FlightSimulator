@@ -36,25 +36,17 @@
             <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
             <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
         </StackPanel>
-        <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0.333,0,-0.333,10">
-            <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Vertcal Speed:</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
+        <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0.333,0,-0.333,0">
+            <TextBlock Text="{Binding VM_heading}" FontSize="10" Padding="10"/>
+            <TextBlock Text="{Binding VM_verticalSpeed}" FontSize="10" Padding="10"/> 
+            <TextBlock Text="{Binding VM_groundSpeed}" FontSize="10" Padding="10"/> 
+            <TextBlock Text="{Binding VM_airSpeed}" FontSize="10" Padding="10"/> 
+            <TextBlock Text="{Binding VM_GPSAlt}" FontSize="10" Padding="10"/> 
+            <TextBlock Text="{Binding VM_roll}" FontSize="10" Padding="10"/> 
+            <TextBlock Text="{Binding VM_pitch}" FontSize="10" Padding="10"/> 
+            <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/> 
         </StackPanel>
         <Views:Joystick x:Name="JoyStick" Grid.Row="3" Grid.Column="3" Margin="51,1,19.333,8.667" Grid.ColumnSpan="2"/>
-        <!--<StackPanel Grid.Row="2" Grid.Column="3" Margin="73.333,86,-0.333,0" Grid.ColumnSpan="2">
-            <TextBlock FontSize="15" HorizontalAlignment="Center">Aileron:</TextBlock>
-            <Slider Maximum="1.0" Minimum="-1.0" TickFrequency="1" />
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="3" Margin="0.333,0,67.667,0">
-            <TextBlock FontSize="15" HorizontalAlignment="Center" >Throttle:</TextBlock>
-            <Slider Orientation="Vertical" Maximum="1.0" Minimum="-1.0" Height="130" HorizontalAlignment="Center" Margin="0"/>
-        </StackPanel>-->
         <Views:Sliders  Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,80,0.333,0.667" Grid.RowSpan="2" />
     </Grid>
 </Window>

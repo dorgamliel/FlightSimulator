@@ -44,6 +44,7 @@ namespace FlightSimulatorApp.UserControls
         {
             if (mousePressed)
             {
+                double rad = innerCircle.ActualWidth / 2;
                 Point knobLocation = e.GetPosition(this);
                 //length of line from middle point of controller to mouse location.
                 double length = lineLength(knobLocation.X, knobLocation.Y, userControl.ActualWidth / 2, userControl.ActualHeight / 2);
@@ -56,13 +57,15 @@ namespace FlightSimulatorApp.UserControls
                 //prevent knob from exiting controller inner circle.
                 else
                 {
-                    double rad = innerCircle.ActualWidth / 2;
                     //calculate angel based on middle point of circle and current mouse location on screen.
-                    double angle = getAngle(userControl.ActualWidth / 2, userControl.ActualHeight / 2, e.GetPosition(this).X, e.GetPosition(this).Y);
+                    double angle = getAngle(userControl.ActualWidth / 2, userControl.ActualHeight / 2, knobLocation.X, knobLocation.Y);
                     //Change knob placement along circle border.
                     knobPosition.X = rad * Math.Cos(angle);
                     knobPosition.Y = -rad * Math.Sin(angle);
                 }
+                var vm = new FlightSimulatorViewModel(new MyFlightSimulator());
+                vm.VM_rudder = knobPosition.X / (innerCircle.ActualWidth / 2);
+                vm.VM_elevator = knobPosition.Y / (innerCircle.ActualHeight / 2);
             }
         }
         private void Knob_MouseUp(object sender, MouseButtonEventArgs e)

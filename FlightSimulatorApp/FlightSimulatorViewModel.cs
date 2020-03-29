@@ -25,27 +25,90 @@ namespace FlightSimulatorApp
             if (this.propertyChanged != null)
                 this.propertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public double VM_throttle {
-            get { return simulator.throttle; }
-            set
-            {
-                simulator.throttle = value;
-                Console.WriteLine(simulator.throttle);
+        public double VM_heading
+        {
+            get { return simulator.heading; }
+        }
+        public double VM_verticalSpeed {
+            get { return simulator.verticalSpeed; }
+        }
+        public double VM_groundSpeed
+        {
+            get { return simulator.groundSpeed; }
+        }
+        public double VM_airSpeed
+        {
+            get { return simulator.airSpeed; }
+        }
+        public double VM_GPSAlt
+        {
+            get { return simulator.GPSAlt; }
+        }
+        public double VM_roll
+        {
+            get { return simulator.roll; }
+        }
+        public double VM_pitch
+        {
+            get { return simulator.pitch; }
+        }
+        public double VM_AltimeterAlt
+        {
+            get { return simulator.AltimeterAlt; }
+        }
+        public double VM_latitude
+        {
+            get { return simulator.latitude; }
+        }
+        public double VM_longitude
+        {
+            get { return simulator.longitude; }
+        }
+        public double VM_throttle
+        {
+            set {
+                simulator.setThrottle(value);
             }
         }
-        public double VM_aileron { get { return simulator.aileron; } }
-        public double VM_elevator { get { return simulator.elevator; } }
-        public double VM_rudder { get { return simulator.rudder; } }
-        public double VM_latitude { get { return simulator.latitude; } }
-        public double VM_longitude { get { return simulator.longitude; } }
-         public double VM_airSpeed { get { return simulator.airSpeed; } }
-         public double VM_altitude { get { return simulator.altitude; } }
-        public double VM_roll { get { return simulator.roll; } }
-        public double VM_pitch { get { return simulator.pitch; } }
-        public double VM_altimeter { get { return simulator.altimeter; } }
-        public double VM_heading { get { return simulator.heading; } }
-        public double VM_groundSpeed { get { return simulator.groundSpeed; } }
-        public double VM_verticalSpeed { get { return simulator.verticalSpeed; } }
-       
+        public double VM_aileron
+        {
+            set
+            {
+                simulator.setAileron(value);
+            }
+        }
+        public double VM_rudder
+        {
+            set
+            {
+                simulator.setRudder(value);
+            }
+        }
+        public double VM_elevator
+        {
+            set
+            {
+                simulator.setElevator(value);
+            }
+        }
+
+/*
+        public void VM_setThrottle(double val)
+        {
+            simulator.setThrottle(val);
+        }
+        public void VM_setAileron(double val)
+        {
+            simulator.setAileron(val);
+        }
+        public void VM_setRudder(double val)
+        {
+            simulator.setRudder(val);
+        }
+        public void VM_setElevator(double val)
+        {
+            simulator.setElevator(val);
+        }*/
+
     }
 }

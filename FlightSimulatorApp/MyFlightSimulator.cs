@@ -11,56 +11,16 @@ namespace FlightSimulatorApp
     {
         private ITelnetClient client;
         public event PropertyChangedEventHandler propertyChanged;
-        public double heading
-        {
-            get;
-            set;
-        }
-        public double vericalSpeed
-        {
-            get;
-            set;
-        }
-        public double groundSpeed
-        {
-            get;
-            set;
-        }
-        public double airSpeed
-        {
-            get;
-            set;
-        }
-        public double GPSAlt
-        {
-            get;
-            set;
-        }
-        public double roll
-        {
-            get;
-            set;
-        }
-        public double pitch
-        {
-            get;
-            set;
-        }
-        public double AltimeterAlt
-        {
-            get;
-            set;
-        }
-        public double latitude
-        {
-            get;
-            set;
-        }
-        public double longitude
-        {
-            get;
-            set;
-        }
+        public double heading { get; set; }
+        public double verticalSpeed { get; set; }
+        public double groundSpeed { get; set; }
+        public double airSpeed { get; set; }
+        public double GPSAlt { get; set; }
+        public double roll { get; set; }
+        public double pitch { get; set; }
+        public double AltimeterAlt { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
 
         public void connect(string ip, int port)
         {
@@ -82,7 +42,7 @@ namespace FlightSimulatorApp
                     client.write("get /orientation/heading-deg");
                     heading = Double.Parse(client.read());
                     client.write("get /velocities/vertical-speed-fps");
-                    vericalSpeed = Double.Parse(client.read());
+                    verticalSpeed = Double.Parse(client.read());
                     //client.write("get /instrumentation/heading-indicator");
                     //groundSpeed = Double.Parse(client.read());
                     client.write("get /velocities/airspeed-kt");

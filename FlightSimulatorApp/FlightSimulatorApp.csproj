@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FlightSimulatorViewModel.cs" />
     <Compile Include="ITelnetClient.cs" />
     <Compile Include="MyFlightSimulator.cs" />
     <Compile Include="MyTelnetClient.cs" />
