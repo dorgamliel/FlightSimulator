@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FlightSimulatorApp.UserControls
 {
     /// <summary>
-    /// Interaction logic for Sliders.xaml
+    /// Interaction logic for MyControls.xaml
     /// </summary>
-    public partial class Sliders : UserControl
+    public partial class MyControls : UserControl
     {
-        public Sliders()
+        public MyControls()
         {
             InitializeComponent();
         }

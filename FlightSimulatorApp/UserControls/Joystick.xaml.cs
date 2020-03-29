@@ -63,7 +63,7 @@ namespace FlightSimulatorApp.UserControls
                     knobPosition.X = rad * Math.Cos(angle);
                     knobPosition.Y = -rad * Math.Sin(angle);
                 }
-                var vm = new FlightSimulatorViewModel(new MyFlightSimulator());
+                var vm = new MyControlsViewModel(new MyFlightSimulator());
                 vm.VM_rudder = knobPosition.X / (innerCircle.ActualWidth / 2);
                 vm.VM_elevator = knobPosition.Y / (innerCircle.ActualHeight / 2);
             }
