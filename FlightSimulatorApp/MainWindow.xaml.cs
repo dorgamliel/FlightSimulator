@@ -21,11 +21,17 @@ namespace FlightSimulatorApp
     public partial class MainWindow1 : Window
     {
         FlightSimulatorViewModel vm;
+        IFlightSimulator fs;
         public MainWindow1()
         {
             InitializeComponent();
-            vm = new FlightSimulatorViewModel(new MyFlightSimulator());
+            fs = new MyFlightSimulator();
+            fs.Heading = 10;
+            fs.Longitude = 1;
+            fs.Latitude = 1;
+            vm = new FlightSimulatorViewModel(fs);
             DataContext = vm;
+            
         }
     }
 }

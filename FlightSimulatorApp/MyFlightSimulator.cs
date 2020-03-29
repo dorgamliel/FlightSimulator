@@ -23,6 +23,7 @@ namespace FlightSimulatorApp
         private double altimeterAlt;
         private double latitude;
         private double longitude;
+        private Tuple<double, double> location;
         public double Heading
         {
             get { return heading; }
@@ -112,6 +113,11 @@ namespace FlightSimulatorApp
                 longitude = value;
                 NotifyPropertyChanged("Longitude");
             }
+        }
+
+        public Tuple<double, double> Location
+        {
+            get { return location; }
         }
 
         public void connect(string ip, int port)

@@ -27,13 +27,18 @@ namespace FlightSimulatorApp
                 this.propertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        public double Latitude
+        public double VM_Latitude
         {
             get { return simulator.Latitude; }
         }
-        public double Longitude
+        public double VM_Longitude
         {
             get { return simulator.Longitude; }
         }
+
+        public Tuple<double, double> VM_Location
+        {
+            get { return new Tuple<double, double>(simulator.Longitude, simulator.Latitude); }
+        } 
     }
 }

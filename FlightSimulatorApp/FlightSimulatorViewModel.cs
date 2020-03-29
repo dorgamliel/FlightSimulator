@@ -91,24 +91,28 @@ namespace FlightSimulatorApp
                 simulator.setElevator(value);
             }
         }
+        public Tuple<double, double> VM_Location
+        {
+            get { return new Tuple<double, double>(simulator.Longitude, simulator.Latitude); }
+        }
 
-/*
-        public void VM_setThrottle(double val)
-        {
-            simulator.setThrottle(val);
-        }
-        public void VM_setAileron(double val)
-        {
-            simulator.setAileron(val);
-        }
-        public void VM_setRudder(double val)
-        {
-            simulator.setRudder(val);
-        }
-        public void VM_setElevator(double val)
-        {
-            simulator.setElevator(val);
-        }*/
+        /*
+                public void VM_setThrottle(double val)
+                {
+                    simulator.setThrottle(val);
+                }
+                public void VM_setAileron(double val)
+                {
+                    simulator.setAileron(val);
+                }
+                public void VM_setRudder(double val)
+                {
+                    simulator.setRudder(val);
+                }
+                public void VM_setElevator(double val)
+                {
+                    simulator.setElevator(val);
+                }*/
 
     }
 }
