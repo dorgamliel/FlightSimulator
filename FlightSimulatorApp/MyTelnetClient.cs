@@ -45,6 +45,7 @@ namespace FlightSimulatorApp
 
         public void write(string command)
         {
+            command += "\r\n";
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
             NetworkStream stream = myClient.GetStream();
             stream.Write(data, 0, data.Length);
