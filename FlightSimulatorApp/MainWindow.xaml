@@ -47,6 +47,6 @@
             <TextBlock Text="{Binding VM_pitch}" FontSize="10" Padding="10"/>
             <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
         </StackPanel>
-        <Views:MyControls Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Views:MyControls x:Name="controllers" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
     </Grid>
 </Window>
