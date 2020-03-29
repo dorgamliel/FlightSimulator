@@ -47,7 +47,6 @@
             <TextBlock Text="{Binding VM_pitch}" FontSize="10" Padding="10"/>
             <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
         </StackPanel>
-        <Views:Joystick x:Name="JoyStick" Grid.Row="3" Grid.Column="3" Margin="51,1,19.333,8.667" Grid.ColumnSpan="2"/>
-        <Views:Sliders  Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,80,0.333,0.667" Grid.RowSpan="2" />
+        <Views:MyControls Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
     </Grid>
 </Window>

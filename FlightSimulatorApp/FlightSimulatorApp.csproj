@@ -61,13 +61,14 @@
     <Compile Include="FlightSimulatorViewModel.cs" />
     <Compile Include="ITelnetClient.cs" />
     <Compile Include="MapViewModel.cs" />
+    <Compile Include="MyControlsViewModel.cs" />
     <Compile Include="MyFlightSimulator.cs" />
     <Compile Include="MyTelnetClient.cs" />
     <Compile Include="UserControls\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Sliders.xaml.cs">
-      <DependentUpon>Sliders.xaml</DependentUpon>
+    <Compile Include="UserControls\MyControls.xaml.cs">
+      <DependentUpon>MyControls.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,9 +88,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Sliders.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UserControls\MyControls.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
