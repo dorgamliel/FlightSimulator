@@ -23,6 +23,10 @@ namespace FlightSimulatorApp
         private double altimeterAlt;
         private double latitude;
         private double longitude;
+        private double throttle;
+        private double aileron;
+        private double rudder;
+        private double elevator;
         private Tuple<double, double> location;
 
         public MyFlightSimulator(ITelnetClient client)
@@ -124,6 +128,42 @@ namespace FlightSimulatorApp
         {
             get { return location; }
         }
+        public double Throttle
+        {
+            get { return throttle; }
+            set
+            {
+                throttle = value;
+                NotifyPropertyChanged("Throttle");
+            }
+        }
+        public double Aileron
+        {
+            get { return aileron; }
+            set
+            {
+                aileron = value;
+                NotifyPropertyChanged("Aileron");
+            }
+        }
+        public double Rudder
+        {
+            get { return rudder; }
+            set
+            {
+                rudder = value;
+                NotifyPropertyChanged("Rudder");
+            }
+        }
+        public double Elevator
+        {
+            get { return elevator; }
+            set
+            {
+                elevator = value;
+                NotifyPropertyChanged("Elevator");
+            }
+        }
 
         public void connect(string ip, int port)
         {
@@ -162,6 +202,18 @@ namespace FlightSimulatorApp
                     latitude = Double.Parse(client.read());
                     client.write("get /position/longitude-deg");
                     longitude = Double.Parse(client.read());
+                    /*
+                     * DO WE NEED TO READ JOYSTICK AND RUDDER VALUES?
+                    client.write("get /controls/engines/current-engine/throttle");
+                    throttle = Double.Parse(client.read());
+                    client.write("get /controls/flight/aileron");
+                    aileron = Double.Parse(client.read());
+                    client.write("get /controls/flight/rudder");
+                    rudder = Double.Parse(client.read());
+                    client.write("get /controls/flight/elevator");
+                    elevator = Double.Parse(client.read());
+                    */
+                    Thread.Sleep(250);
                 }
             }).Start();
         }
