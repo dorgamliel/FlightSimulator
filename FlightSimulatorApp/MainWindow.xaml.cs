@@ -34,7 +34,9 @@ namespace FlightSimulatorApp
             vm = new FlightSimulatorViewModel(fs);
             DataContext = vm;
             mapVM = new MapViewModel(fs);
+            MyControlsViewModel controlVM = new MyControlsViewModel(fs);
             map.Center = mapVM.VM_Location;
+            DataContext = controlVM;
         }
     }
 }
