@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ITelnetClient.cs" />
+    <Compile Include="MapViewModel.cs" />
     <Compile Include="MyFlightSimulator.cs" />
     <Compile Include="MyTelnetClient.cs" />
     <Compile Include="UserControls\Joystick.xaml.cs">
@@ -115,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\plane.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
