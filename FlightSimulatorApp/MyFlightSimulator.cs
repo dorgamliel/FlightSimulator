@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,16 +12,113 @@ namespace FlightSimulatorApp
     {
         private ITelnetClient client;
         public event PropertyChangedEventHandler propertyChanged;
-        public double heading { get; set; }
-        public double verticalSpeed { get; set; }
-        public double groundSpeed { get; set; }
-        public double airSpeed { get; set; }
-        public double GPSAlt { get; set; }
-        public double roll { get; set; }
-        public double pitch { get; set; }
-        public double AltimeterAlt { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
+
+        private double heading;
+        private double verticalSpeed;
+        private double groundSpeed;
+        private double airSpeed;
+        private double gpsAlt;
+        private double roll;
+        private double pitch;
+        private double altimeterAlt;
+        private double latitude;
+        private double longitude;
+        private Tuple<double, double> location;
+        public double Heading
+        {
+            get { return heading; }
+            set
+            {
+                heading = value;
+                NotifyPropertyChanged("Heading");
+            }
+        }
+        public double VerticalSpeed
+        {
+            get { return verticalSpeed; }
+            set
+            {
+                verticalSpeed = value;
+                NotifyPropertyChanged("VerticalSpeed");
+            }
+        }
+        public double GroundSpeed
+        {
+            get { return groundSpeed; }
+            set
+            {
+                groundSpeed = value;
+                NotifyPropertyChanged("GroundSpeed");
+            }
+        }
+        public double AirSpeed
+        {
+            get { return airSpeed; }
+            set
+            {
+                airSpeed = value;
+                NotifyPropertyChanged("AirSpeed");
+            }
+        }
+        public double GPSAlt
+        {
+            get { return gpsAlt; }
+            set
+            {
+                gpsAlt = value;
+                NotifyPropertyChanged("GPSAlt");
+            }
+        }
+        public double Roll
+        {
+            get { return roll; }
+            set
+            {
+                roll = value;
+                NotifyPropertyChanged("Roll");
+            }
+        }
+        public double Pitch
+        {
+            get { return pitch; }
+            set
+            {
+                pitch = value;
+                NotifyPropertyChanged("Pitch");
+            }
+        }
+        public double AltimeterAlt
+        {
+            get { return altimeterAlt; }
+            set
+            {
+                altimeterAlt = value;
+                NotifyPropertyChanged("AltimeterAlt");
+            }
+        }
+        public double Latitude
+        {
+            get { return latitude; }
+            set
+            {
+                latitude = value;
+                NotifyPropertyChanged("Latitude");
+            }
+        }
+        public double Longitude
+        {
+            get { return longitude; }
+            set
+            {
+                longitude = value;
+                NotifyPropertyChanged("Longitude");
+            }
+        }
+
+        public Tuple<double, double> Location
+        {
+            get { return location; }
+        }
 
         public void connect(string ip, int port)
         {
@@ -35,7 +133,7 @@ namespace FlightSimulatorApp
 
         public void start()
         {
-            new Thread(delegate()
+            new Thread(delegate ()
             {
                 while (true)
                 {
@@ -86,5 +184,14 @@ namespace FlightSimulatorApp
             client.write("set /controls/flight/elevator " + val.ToString());
             client.read();
         }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.propertyChanged != null)
+            {
+                this.propertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
     }
 }

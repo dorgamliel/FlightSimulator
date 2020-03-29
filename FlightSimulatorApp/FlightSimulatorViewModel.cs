@@ -27,18 +27,18 @@ namespace FlightSimulatorApp
         }
         public double VM_heading
         {
-            get { return simulator.heading; }
+            get { return simulator.Heading; }
         }
         public double VM_verticalSpeed {
-            get { return simulator.verticalSpeed; }
+            get { return simulator.VerticalSpeed; }
         }
         public double VM_groundSpeed
         {
-            get { return simulator.groundSpeed; }
+            get { return simulator.GroundSpeed; }
         }
         public double VM_airSpeed
         {
-            get { return simulator.airSpeed; }
+            get { return simulator.AirSpeed; }
         }
         public double VM_GPSAlt
         {
@@ -46,11 +46,11 @@ namespace FlightSimulatorApp
         }
         public double VM_roll
         {
-            get { return simulator.roll; }
+            get { return simulator.Roll; }
         }
         public double VM_pitch
         {
-            get { return simulator.pitch; }
+            get { return simulator.Pitch; }
         }
         public double VM_AltimeterAlt
         {
@@ -58,11 +58,11 @@ namespace FlightSimulatorApp
         }
         public double VM_latitude
         {
-            get { return simulator.latitude; }
+            get { return simulator.Latitude; }
         }
         public double VM_longitude
         {
-            get { return simulator.longitude; }
+            get { return simulator.Longitude; }
         }
         public double VM_throttle
         {
@@ -91,24 +91,28 @@ namespace FlightSimulatorApp
                 simulator.setElevator(value);
             }
         }
+        public Tuple<double, double> VM_Location
+        {
+            get { return new Tuple<double, double>(simulator.Longitude, simulator.Latitude); }
+        }
 
-/*
-        public void VM_setThrottle(double val)
-        {
-            simulator.setThrottle(val);
-        }
-        public void VM_setAileron(double val)
-        {
-            simulator.setAileron(val);
-        }
-        public void VM_setRudder(double val)
-        {
-            simulator.setRudder(val);
-        }
-        public void VM_setElevator(double val)
-        {
-            simulator.setElevator(val);
-        }*/
+        /*
+                public void VM_setThrottle(double val)
+                {
+                    simulator.setThrottle(val);
+                }
+                public void VM_setAileron(double val)
+                {
+                    simulator.setAileron(val);
+                }
+                public void VM_setRudder(double val)
+                {
+                    simulator.setRudder(val);
+                }
+                public void VM_setElevator(double val)
+                {
+                    simulator.setElevator(val);
+                }*/
 
     }
 }
