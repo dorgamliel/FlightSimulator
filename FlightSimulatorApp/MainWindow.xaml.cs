@@ -28,10 +28,9 @@ namespace FlightSimulatorApp
         public MainWindow1()
         {
             InitializeComponent();
-            fs = new MyFlightSimulator();
-            fs.Heading = 10;
-            fs.Longitude = 22.5;
-            fs.Latitude = 20.5;
+            MyTelnetClient client = new MyTelnetClient();
+            client.connect("localhost", 5402);
+            fs = new MyFlightSimulator(client);
             vm = new FlightSimulatorViewModel(fs);
             DataContext = vm;
             mapVM = new MapViewModel(fs);

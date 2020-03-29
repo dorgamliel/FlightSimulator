@@ -24,6 +24,11 @@ namespace FlightSimulatorApp
         private double latitude;
         private double longitude;
         private Tuple<double, double> location;
+
+        public MyFlightSimulator(ITelnetClient client)
+        {
+            this.client = client;
+        }
         public double Heading
         {
             get { return heading; }
