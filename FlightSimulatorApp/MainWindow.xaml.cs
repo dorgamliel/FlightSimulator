@@ -39,5 +39,21 @@ namespace FlightSimulatorApp
             map.DataContext = mapVM;
             controllers.DataContext = ctrls;
         }
+
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkbox.IsChecked == false)
+            {
+                Settings lw = new Settings();
+                lw.ShowDialog();
+            }
+            else
+            {
+                if ((String)Connect.Content == "Disconnect")
+                    Connect.Content = "Connect";
+                else
+                    Connect.Content = "Disconnect";
+            }
+        }
     }
 }

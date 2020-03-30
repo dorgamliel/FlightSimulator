@@ -48,5 +48,8 @@
             <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
         </StackPanel>
         <Views:MyControls x:Name="controllers" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Button x:Name="Connect" Grid.Column="4" Grid.Row="3" Margin="81,145,9.333,4.667" Content="Connect" FontFamily="Tunga" Width="70" Height="20" Click="Connect_Click"/>
+        <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="4" ToolTip="Use Default settings" HorizontalAlignment="Left" Margin="56,148,0,0" Grid.Row="3" VerticalAlignment="Top" Width="18"/>
+        <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="107,147,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
