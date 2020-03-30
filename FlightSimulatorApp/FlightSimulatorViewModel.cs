@@ -57,37 +57,6 @@ namespace FlightSimulatorApp
         {
             get { return simulator.AltimeterAlt; }
         }
-        public double VM_throttle
-        {
-            //get { return simulator.Throttle; }
-            set {
-                simulator.setThrottle(value);
-            }
-        }
-        public double VM_aileron
-        {
-            get { return simulator.Aileron; }
-            set
-            {
-                simulator.setAileron(value);
-            }
-        }
-        public double VM_rudder
-        {
-            get { return simulator.Rudder; }
-            set
-            {
-                simulator.setRudder(value);
-            }
-        }
-        public double VM_elevator
-        {
-            get { return simulator.Elevator; }
-            set
-            {
-                simulator.setElevator(value);
-            }
-        }
 
         /*
                 public void VM_setThrottle(double val)

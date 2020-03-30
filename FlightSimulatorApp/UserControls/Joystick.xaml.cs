@@ -23,6 +23,8 @@ namespace FlightSimulatorApp.UserControls
     public partial class Joystick : UserControl
     {
         bool mousePressed;
+        double knobPoistionX = 0;
+        double knobPoistionY = 0;
         public Joystick()
         {
             InitializeComponent();
@@ -50,7 +52,7 @@ namespace FlightSimulatorApp.UserControls
                 double length = lineLength(knobLocation.X, knobLocation.Y, userControl.ActualWidth / 2, userControl.ActualHeight / 2);
                 //If knob is within inner circle, change axes freely (according to mouse location).
                 if (length < innerCircle.Width / 2)
-                {                    
+                {
                     knobPosition.X = knobLocation.X - userControl.ActualWidth / 2;
                     knobPosition.Y = knobLocation.Y - userControl.ActualHeight / 2;
                 }
@@ -63,6 +65,8 @@ namespace FlightSimulatorApp.UserControls
                     knobPosition.X = rad * Math.Cos(angle);
                     knobPosition.Y = -rad * Math.Sin(angle);
                 }
+                X = knobPosition.X / (innerCircle.ActualWidth / 2);
+                Y = knobPosition.Y / (innerCircle.ActualHeight / 2);
                 /*
                 var vm = new MyControlsViewModel(new MyFlightSimulator());
                 vm.VM_rudder = knobPosition.X / (innerCircle.ActualWidth / 2);
@@ -76,7 +80,7 @@ namespace FlightSimulatorApp.UserControls
             //releases mouse capturing by knob.
             Mouse.Capture(null);
             //Activates knob centering storyboard.
-            Storyboard sb = (Storyboard) Knob.FindResource("CenterKnob");
+            Storyboard sb = (Storyboard)Knob.FindResource("CenterKnob");
             sb.Begin();
         }
         public double lineLength(double x, double y, double x1, double y1)
@@ -85,12 +89,40 @@ namespace FlightSimulatorApp.UserControls
         }
         public double getAngle(double x, double y, double x1, double y1)
         {
-            return -Math.Atan2(y1-y, x1-x);
+            return -Math.Atan2(y1 - y, x1 - x);
         }
-       private void resetKnobPosition()
+        private void resetKnobPosition()
         {
             knobPosition.X = 0;
             knobPosition.Y = 0;
+            X = knobPosition.X;
+            Y = knobPosition.Y;
         }
+        
+        public double X
+        {
+            get { return (double)GetValue(XProperty); }
+            set { SetValue(XProperty, value); }
+        }
+        
+        // Using a DependencyProperty as the backing store for X.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty XProperty =
+            DependencyProperty.Register("X", typeof(double), typeof(Joystick));
+
+
+
+        public double Y
+        {
+            get { return (double)GetValue(YProperty); }
+            set { SetValue(YProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Y.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty YProperty =
+            DependencyProperty.Register("Y", typeof(double), typeof(Joystick));
+
+
+
+
     }
 }

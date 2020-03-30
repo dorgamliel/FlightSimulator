@@ -144,6 +144,7 @@ namespace FlightSimulatorApp
             {
                 aileron = value;
                 NotifyPropertyChanged("Aileron");
+                Latitude += 1;
             }
         }
         public double Rudder
