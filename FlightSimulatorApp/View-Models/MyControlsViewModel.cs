@@ -10,11 +10,11 @@ namespace FlightSimulatorApp
     class MyControlsViewModel : INotifyPropertyChanged
     {
         private IFlightSimulator simulator;
-        public event PropertyChangedEventHandler propertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         public MyControlsViewModel(IFlightSimulator fs)
         {
             this.simulator = fs;
-            simulator.propertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+            simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
@@ -22,8 +22,8 @@ namespace FlightSimulatorApp
         }
         public void NotifyPropertyChanged(string propName)
         {
-            if (this.propertyChanged != null)
-                this.propertyChanged(this, new PropertyChangedEventArgs(propName));
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
         public double VM_throttle
         {

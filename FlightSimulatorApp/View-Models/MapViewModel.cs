@@ -10,13 +10,13 @@ namespace FlightSimulatorApp
 {
     class MapViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler propertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         private IFlightSimulator simulator;
 
         public MapViewModel(IFlightSimulator sim)
         {
             this.simulator = sim;
-            simulator.propertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
+            simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
@@ -24,8 +24,8 @@ namespace FlightSimulatorApp
 
         public void NotifyPropertyChanged(string propName)
         {
-            if (this.propertyChanged != null)
-                this.propertyChanged(this, new PropertyChangedEventArgs(propName));
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
         public double VM_Latitude

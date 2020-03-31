@@ -41,7 +41,7 @@
         <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0.333,0,-0.333,0">
             <TextBlock Text="{Binding VM_heading}" FontSize="10" Padding="10"/>
             <TextBlock Text="{Binding VM_verticalSpeed}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_groundSpeed}" FontSize="10" Padding="10"/>
+            <TextBlock Text="{Binding VM_groundSpeed, Mode=OneWay}" FontSize="10" Padding="10"/>
             <TextBlock Text="{Binding VM_airSpeed}" FontSize="10" Padding="10"/>
             <TextBlock Text="{Binding VM_GPSAlt}" FontSize="10" Padding="10"/>
             <TextBlock Text="{Binding VM_roll}" FontSize="10" Padding="10"/>

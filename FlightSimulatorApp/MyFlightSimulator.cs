@@ -11,7 +11,7 @@ namespace FlightSimulatorApp
     class MyFlightSimulator : IFlightSimulator
     {
         private ITelnetClient client;
-        public event PropertyChangedEventHandler propertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private double heading;
         private double verticalSpeed;
@@ -144,7 +144,7 @@ namespace FlightSimulatorApp
             {
                 aileron = value;
                 NotifyPropertyChanged("Aileron");
-                Latitude += 1;
+                
             }
         }
         public double Rudder
@@ -245,9 +245,9 @@ namespace FlightSimulatorApp
 
         public void NotifyPropertyChanged(string propName)
         {
-            if (this.propertyChanged != null)
+            if (this.PropertyChanged != null)
             {
-                this.propertyChanged(this, new PropertyChangedEventArgs(propName));
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
 
