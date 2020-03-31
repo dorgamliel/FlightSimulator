@@ -21,11 +21,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="1.3*" />
         </Grid.RowDefinitions>
-        <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="10" Center="{Binding VM_Location}" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="0,0,0.667,0">
-            <m:MapLayer>
-                <Image Source="resources/plane.png" Stretch="UniformToFill" Margin="206,234,206,239" >
+        <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="13" Center="32.0055, 34.8854" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="0,0,0.667,0">
+            <Grid Width="50" Height="80" 
+              m:MapLayer.Position="{Binding VM_Location}">
+                <Image Source="resources/plane.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.Left="-484" Canvas.Top="-263">
                 </Image>
-            </m:MapLayer>
+            </Grid>
         </m:Map>
         <StackPanel Grid.Column="3" Grid.RowSpan="2" Margin="0,0,0,5">
             <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>

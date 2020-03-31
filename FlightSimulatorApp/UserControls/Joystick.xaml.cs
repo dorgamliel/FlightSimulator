@@ -23,8 +23,6 @@ namespace FlightSimulatorApp.UserControls
     public partial class Joystick : UserControl
     {
         bool mousePressed;
-        double knobPoistionX = 0;
-        double knobPoistionY = 0;
         public Joystick()
         {
             InitializeComponent();
