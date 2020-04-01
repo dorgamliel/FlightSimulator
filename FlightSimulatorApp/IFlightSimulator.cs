@@ -17,6 +17,8 @@ namespace FlightSimulatorApp
         void setAileron(double val);
         void setRudder(double val);
         void setElevator(double val);
+        bool MessageInd { get; set; }
+        string Message { get; set; }
         double Heading { get; set; }
         double VerticalSpeed { get; set; }
         double GroundSpeed { get; set; }

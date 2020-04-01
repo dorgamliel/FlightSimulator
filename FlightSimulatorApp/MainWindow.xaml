@@ -52,5 +52,28 @@
         <Button x:Name="Connect" Grid.Column="4" Grid.Row="3" Margin="81,145,9.333,4.667" Content="Connect" FontFamily="Tunga" Width="70" Height="20" Click="Connect_Click"/>
         <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="4" ToolTip="Use Default settings" HorizontalAlignment="Left" Margin="56,148,0,0" Grid.Row="3" VerticalAlignment="Top" Width="18"/>
         <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="107,147,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Canvas x:Name="msg">
+            <Canvas.Resources>
+                <Storyboard x:Key="Appearance" Duration="00:00:00:03" AutoReverse="True" SpeedRatio="2">
+                    <DoubleAnimation From="-17" To="0" Storyboard.TargetProperty="(Canvas.Top)"  FillBehavior="Stop"/>
+                </Storyboard>
+            </Canvas.Resources>
+            <TextBlock x:Name="alert" Text="{Binding VM_Message}" Margin="10,0,0,0" Background="LightYellow" Width="auto" VerticalAlignment="Top" Height="17">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=VM_MessageInd, IsAsync=True}" Value="true">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Appearance}">
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Canvas>
     </Grid>
 </Window>

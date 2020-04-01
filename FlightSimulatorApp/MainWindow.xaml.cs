@@ -30,7 +30,6 @@ namespace FlightSimulatorApp
         {
             InitializeComponent();
             MyTelnetClient client = new MyTelnetClient();
-            client.connect("localhost", 5402);
             fs = new MyFlightSimulator(client);
             dash = new DashboardViewModel(fs);
             ctrls = new MyControlsViewModel(fs);
@@ -39,20 +38,41 @@ namespace FlightSimulatorApp
             map.DataContext = mapVM;
             controllers.DataContext = ctrls;
         }
-
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            if (checkbox.IsChecked == false)
+            //If user chose not to use default settings, a dialog will open for entering port and IP.
+             if (checkbox.IsChecked == false)
             {
-                Settings lw = new Settings();
-                lw.ShowDialog();
+                if ((string)Connect.Content != "Disconnect")
+                {
+                    Settings lw = new Settings();
+                    lw.ShowDialog();
+                    fs.connect(lw.IP, Int32.Parse(lw.Port));
+                    if (dash.VM_Message == "Connected to server.")
+                    {
+                        Connect.Content = "Disconnect";
+                    }
+                }
+                else
+                {
+                    fs.disconnect();
+                    Connect.Content = "Connect";
+                }
+
+            }
+            //Using default settings.
+            else if ((string)Connect.Content == "Connect")
+            {
+                fs.connect("127.0.0.1", 5402);
+                if (dash.VM_Message == "Connected to server.")
+                {
+                    Connect.Content = "Disconnect";
+                }
             }
             else
             {
-                if ((String)Connect.Content == "Disconnect")
-                    Connect.Content = "Connect";
-                else
-                    Connect.Content = "Disconnect";
+                fs.disconnect();
+                Connect.Content = "Connect";
             }
         }
     }

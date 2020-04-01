@@ -53,5 +53,9 @@ namespace FlightSimulatorApp
                 simulator.setElevator(value);
             }
         }
+        public bool VM_MessageInd
+        {
+            get { return simulator.MessageInd; }
+        }
     }
 }

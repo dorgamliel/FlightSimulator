@@ -12,7 +12,7 @@ namespace FlightSimulatorApp
     {
         private ITelnetClient client;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        private string message;
         private double heading;
         private double verticalSpeed;
         private double groundSpeed;
@@ -27,6 +27,7 @@ namespace FlightSimulatorApp
         private double aileron;
         private double rudder;
         private double elevator;
+        private bool connected = true;
         private Tuple<double, double> location;
 
         public MyFlightSimulator(ITelnetClient client)
@@ -165,16 +166,47 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Elevator");
             }
         }
+        public bool MessageInd
+        {
+            get { return connected; }
+            set
+            {
+                connected = value;
+                NotifyPropertyChanged("MessageInd");
+            }
+        }
+
+        public string Message
+        { 
+            get { return message; }
+            set
+            {
+                message = value;
+                NotifyPropertyChanged("Message");
+            }
+        }
 
         public void connect(string ip, int port)
         {
             client = new MyTelnetClient();
-            client.connect(ip, port);
+            try
+            {
+                client.connect(ip, port);
+                MessageInd = true;
+                Message = "Connected to server.";
+            } catch (Exception e)
+            {
+                MessageInd = true;
+                Message = "Unable to connect to server.";
+            }
+            
         }
 
         public void disconnect()
         {
             client.disconnect();
+            MessageInd = true;
+            Message = "Disconnected from server.";
         }
 
         public void start()
