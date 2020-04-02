@@ -44,7 +44,7 @@ namespace FlightSimulatorApp
             {
                 blankArea.Text = "Please fill both settings.";
             } else if (Regex.Matches(b_port.Text, @"[^0-9]").Count > 0 || Regex.Matches(b_ip.Text, @"[^0-9.]").Count > 0 ||
-                Regex.Matches(b_ip.Text, @"[.]").Count > 3)
+                Regex.Matches(b_ip.Text, @"[.]").Count != 3)
             {
                 blankArea.Text = "Illegal input.";
             } else if (Int64.Parse(b_port.Text) < 0 || Int64.Parse(b_port.Text) > 65535) {

@@ -62,13 +62,14 @@
         </StackPanel>
         <Views:MyControls x:Name="controllers" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
-            <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="2" ToolTip="Use Default settings"  Margin="60,148,0,0" Grid.Row="3" VerticalAlignment="Top" Width="18" Height="15"/>
-            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,147,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Top" Height="18" Width="66"/>
-            <Button x:Name="Connect" Grid.Column="2" Grid.Row="3" Margin="20,146,28,6" Content="Connect" FontFamily="Tunga" Click="Connect_Click"/>
-            
-            
+            <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="2" ToolTip="Use Default settings" Margin="0,5" Grid.Row="3" VerticalAlignment="Bottom" Width="19" Height="17"/>
+            <TextBlock Grid.Column="2" Margin="0,5" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Bottom" Height="18" Width="66"/>
+            <Button x:Name="Connect" Grid.Column="2" Grid.Row="3" Content="Connect" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Tunga" Width="70" Height="20" Click="Connect_Click"/>
+
+
+
         </StackPanel>
-        
+
         <Canvas x:Name="msg">
             <Canvas.Resources>
                 <Storyboard x:Key="Appearance" Duration="00:00:00:03" AutoReverse="True" SpeedRatio="2">
