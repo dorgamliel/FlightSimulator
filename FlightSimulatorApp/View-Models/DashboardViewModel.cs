@@ -67,5 +67,13 @@ namespace FlightSimulatorApp
         {
             get { return simulator.Longitude; }
         }
+        public bool VM_MessageInd
+        {
+            get { return simulator.MessageInd; }
+        }
+        public string VM_Message
+        {
+            get { return simulator.Message; }
+        }
     }
 }

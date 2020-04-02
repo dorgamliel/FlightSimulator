@@ -40,6 +40,7 @@ namespace FlightSimulatorApp
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+            catch (Exception){}
             return responseData;
         }
 
@@ -47,9 +48,16 @@ namespace FlightSimulatorApp
         {
             command += "\r\n";
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
-            NetworkStream stream = myClient.GetStream();
-            stream.Write(data, 0, data.Length);
-            Console.WriteLine("Sent: {0}", command);
+            try
+            {
+                NetworkStream stream = myClient.GetStream();
+                stream.Write(data, 0, data.Length);
+                Console.WriteLine("Sent: {0}", command);
+            } catch(Exception e)
+            {
+
+            }
+            
         }
     }
 }
