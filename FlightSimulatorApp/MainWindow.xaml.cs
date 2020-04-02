@@ -36,7 +36,6 @@ namespace FlightSimulatorApp
             mapVM = new MapViewModel(fs);
             DataContext = dash;
             map.DataContext = mapVM;
-            fs.start();
             controllers.DataContext = ctrls;
         }
         private void Connect_Click(object sender, RoutedEventArgs e)
@@ -52,6 +51,7 @@ namespace FlightSimulatorApp
                     if (dash.VM_Message == "Connected to server.")
                     {
                         Connect.Content = "Disconnect";
+                        fs.start();
                     }
                 }
                 else
@@ -68,6 +68,7 @@ namespace FlightSimulatorApp
                 if (dash.VM_Message == "Connected to server.")
                 {
                     Connect.Content = "Disconnect";
+                    fs.start();
                 }
             }
             else

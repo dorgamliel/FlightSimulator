@@ -28,18 +28,27 @@ namespace FlightSimulatorApp
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        public double VM_Latitude
+        public string VM_Latitude
         {
             get { return simulator.Latitude; }
         }
-        public double VM_Longitude
+        public string VM_Longitude
         {
             get { return simulator.Longitude; }
         }
 
         public Location VM_Location
         {
-            get { return new Location(simulator.Longitude, simulator.Latitude); }
+            get
+            {
+                try
+                {
+                    return new Location(Double.Parse(simulator.Longitude), Double.Parse(simulator.Latitude));
+                } catch (Exception)
+                {
+                    return new Location(0, 0);
+                }
+            }
         }
     }
 }

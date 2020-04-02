@@ -14,28 +14,28 @@ namespace FlightSimulatorApp
         private Mutex mtx = new Mutex();
         public event PropertyChangedEventHandler PropertyChanged;
         private string message;
-        private double heading;
-        private double verticalSpeed;
-        private double groundSpeed;
-        private double airSpeed;
-        private double gpsAlt;
-        private double roll;
-        private double pitch;
-        private double altimeterAlt;
-        private double latitude;
-        private double longitude;
+        private string heading;
+        private string verticalSpeed;
+        private string groundSpeed;
+        private string airSpeed;
+        private string gpsAlt;
+        private string roll;
+        private string pitch;
+        private string altimeterAlt;
+        private string latitude;
+        private string longitude;
         private double throttle;
         private double aileron;
         private double rudder;
         private double elevator;
         private bool connected = true;
-        private Tuple<double, double> location;
+        
 
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
         }
-        public double Heading
+        public string Heading
         {
             get { return heading; }
             set
@@ -44,7 +44,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Heading");
             }
         }
-        public double VerticalSpeed
+        public string VerticalSpeed
         {
             get { return verticalSpeed; }
             set
@@ -53,7 +53,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("VerticalSpeed");
             }
         }
-        public double GroundSpeed
+        public string GroundSpeed
         {
             get { return groundSpeed; }
             set
@@ -62,7 +62,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("GroundSpeed");
             }
         }
-        public double AirSpeed
+        public string AirSpeed
         {
             get { return airSpeed; }
             set
@@ -71,7 +71,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("AirSpeed");
             }
         }
-        public double GPSAlt
+        public string GPSAlt
         {
             get { return gpsAlt; }
             set
@@ -80,7 +80,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("GPSAlt");
             }
         }
-        public double Roll
+        public string Roll
         {
             get { return roll; }
             set
@@ -89,7 +89,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Roll");
             }
         }
-        public double Pitch
+        public string Pitch
         {
             get { return pitch; }
             set
@@ -98,7 +98,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Pitch");
             }
         }
-        public double AltimeterAlt
+        public string AltimeterAlt
         {
             get { return altimeterAlt; }
             set
@@ -107,7 +107,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("AltimeterAlt");
             }
         }
-        public double Latitude
+        public string Latitude
         {
             get { return latitude; }
             set
@@ -116,7 +116,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Latitude");
             }
         }
-        public double Longitude
+        public string Longitude
         {
             get { return longitude; }
             set
@@ -124,11 +124,6 @@ namespace FlightSimulatorApp
                 longitude = value;
                 NotifyPropertyChanged("Longitude");
             }
-        }
-
-        public Tuple<double, double> Location
-        {
-            get { return location; }
         }
         public double Throttle
         {
@@ -217,26 +212,26 @@ namespace FlightSimulatorApp
                 while (true)
                 {
                     mtx.WaitOne();
-                    //client.write("get /orientation/heading-deg");
-                    //heading = Double.Parse(client.read());
-                    //client.write("get /velocities/vertical-speed-fps");
-                    //verticalSpeed = Double.Parse(client.read());
-                    //client.write("get /instrumentation/heading-indicator");
-                    //groundSpeed = Double.Parse(client.read());
-                    //client.write("get /velocities/airspeed-kt");
-                    //airSpeed = Double.Parse(client.read());
-                    //client.write("get /position/altitiude-ft");
-                    //GPSAlt = Double.Parse(client.read());
-                    //client.write("get /orientation/roll-deg");
-                    //roll = Double.Parse(client.read());
-                    //client.write("get /orientation/pitch-deg");
-                    //pitch = Double.Parse(client.read());
-                    //client.write("get /position/altitiude-ft");
-                    //AltimeterAlt = Double.Parse(client.read());
+                    client.write("get /orientation/heading-deg");
+                    Heading = (client.read());
+                    client.write("get /velocities/vertical-speed-fps");
+                    VerticalSpeed = (client.read());
+                    client.write("get /instrumentation/heading-indicator");
+                    GroundSpeed = (client.read());
+                    client.write("get /velocities/airspeed-kt");
+                    AirSpeed = (client.read());
+                    client.write("get /position/altitiude-ft");
+                    GPSAlt = (client.read());
+                    client.write("get /orientation/roll-deg");
+                    Roll = (client.read());
+                    client.write("get /orientation/pitch-deg");
+                    Pitch = (client.read());
+                    client.write("get /position/altitiude-ft");
+                    AltimeterAlt = (client.read());
                     client.write("get /position/latitude-deg");
-                    latitude = Double.Parse(client.read());
-                    //client.write("get /position/longitude-deg");
-                    //longitude = Double.Parse(client.read());
+                    Latitude = (client.read());
+                    client.write("get /position/longitude-deg");
+                    Longitude = (client.read());
                     /*
                      * DO WE NEED TO READ JOYSTICK AND RUDDER VALUES?
                     client.write("get /controls/engines/current-engine/throttle");

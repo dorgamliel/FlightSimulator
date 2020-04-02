@@ -9,49 +9,66 @@
         Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="260*" />
+            <ColumnDefinition Width="309*" />
+            <ColumnDefinition Width="223*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="1.3*" />
+            <RowDefinition Height="133*" />
+            <RowDefinition Height="148*" />
+            <RowDefinition Height="116*" />
+            <RowDefinition Height="172*" />
         </Grid.RowDefinitions>
-        <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="13" Center="32.0055, 34.8854" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="0,0,0.667,0">
+        <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="13" Center="32.0055, 34.8854" Grid.ColumnSpan="2" Grid.RowSpan="4">
             <Grid Width="50" Height="80" 
               m:MapLayer.Position="{Binding VM_Location}" m:MapLayer.PositionOrigin="Center">
                 <Image Source="resources/plane.png">
                 </Image>
             </Grid>
         </m:Map>
-        <StackPanel Grid.Column="3" Grid.RowSpan="2" Margin="0,0,0,5">
-            <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Vertical Speed:</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
-            <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
+        <StackPanel Grid.Column="2" Grid.RowSpan="2">
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
+                <TextBlock Text="{Binding VM_Heading}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Vertical Speed:</TextBlock>
+                <TextBlock Text="{Binding VM_VerticalSpeed}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
+                <TextBlock Text="{Binding VM_GroundSpeed}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
+                <TextBlock Text="{Binding VM_AirSpeed}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
+                <TextBlock Text="{Binding VM_GPSAlt}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
+                <TextBlock Text="{Binding VM_Roll}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
+                <TextBlock Text="{Binding VM_Pitch}" FontSize="10" Padding="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
+                <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="4" Grid.RowSpan="2" Margin="0.333,0,-0.333,0">
-            <TextBlock Text="{Binding VM_heading}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_verticalSpeed}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_groundSpeed, Mode=OneWay}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_airSpeed}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_GPSAlt}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_roll}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_pitch}" FontSize="10" Padding="10"/>
-            <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
+        <Views:MyControls x:Name="controllers" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+            <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="2" ToolTip="Use Default settings"  Margin="60,148,0,0" Grid.Row="3" VerticalAlignment="Top" Width="18" Height="15"/>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="0,147,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Top" Height="18" Width="66"/>
+            <Button x:Name="Connect" Grid.Column="2" Grid.Row="3" Margin="20,146,28,6" Content="Connect" FontFamily="Tunga" Click="Connect_Click"/>
+            
+            
         </StackPanel>
-        <Views:MyControls x:Name="controllers" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-        <Button x:Name="Connect" Grid.Column="4" Grid.Row="3" Margin="81,145,9.333,4.667" Content="Connect" FontFamily="Tunga" Width="70" Height="20" Click="Connect_Click"/>
-        <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="4" ToolTip="Use Default settings" HorizontalAlignment="Left" Margin="56,148,0,0" Grid.Row="3" VerticalAlignment="Top" Width="18"/>
-        <TextBlock Grid.Column="3" HorizontalAlignment="Left" Margin="107,147,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        
         <Canvas x:Name="msg">
             <Canvas.Resources>
                 <Storyboard x:Key="Appearance" Duration="00:00:00:03" AutoReverse="True" SpeedRatio="2">

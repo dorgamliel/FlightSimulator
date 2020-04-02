@@ -19,16 +19,16 @@ namespace FlightSimulatorApp
         void setElevator(double val);
         bool MessageInd { get; set; }
         string Message { get; set; }
-        double Heading { get; set; }
-        double VerticalSpeed { get; set; }
-        double GroundSpeed { get; set; }
-        double AirSpeed { get; set; }
-        double GPSAlt { get; set; }
-        double Roll { get; set; }
-        double Pitch { get; set; }
-        double AltimeterAlt { get; set; }
-        double Latitude { get; set; }
-        double Longitude { get; set; }
+        string Heading { get; set; }
+        string VerticalSpeed { get; set; }
+        string GroundSpeed { get; set; }
+        string AirSpeed { get; set; }
+        string GPSAlt { get; set; }
+        string Roll { get; set; }
+        string Pitch { get; set; }
+        string AltimeterAlt { get; set; }
+        string Latitude { get; set; }
+        string Longitude { get; set; }
         double Throttle { get; set; }
         double Aileron { get; set; }
         double Rudder { get; set; }

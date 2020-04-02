@@ -27,45 +27,37 @@ namespace FlightSimulatorApp
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public double VM_heading
+        public string VM_Heading
         {
             get { return simulator.Heading; }
         }
-        public double VM_verticalSpeed
+        public string VM_VerticalSpeed
         {
             get { return simulator.VerticalSpeed; }
         }
-        public double VM_groundSpeed
+        public string VM_GroundSpeed
         {
             get { return simulator.GroundSpeed; }
         }
-        public double VM_airSpeed
+        public string VM_AirSpeed
         {
             get { return simulator.AirSpeed; }
         }
-        public double VM_GPSAlt
+        public string VM_GPSAlt
         {
             get { return simulator.GPSAlt; }
         }
-        public double VM_roll
+        public string VM_Roll
         {
             get { return simulator.Roll; }
         }
-        public double VM_pitch
+        public string VM_Pitch
         {
             get { return simulator.Pitch; }
         }
-        public double VM_AltimeterAlt
+        public string VM_AltimeterAlt
         {
             get { return simulator.AltimeterAlt; }
-        }
-        public double VM_latitude
-        {
-            get { return simulator.Latitude; }
-        }
-        public double VM_longitude
-        {
-            get { return simulator.Longitude; }
         }
         public bool VM_MessageInd
         {

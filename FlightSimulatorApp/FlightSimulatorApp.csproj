@@ -66,7 +66,6 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="View-Models\DashboardViewModel.cs" />
-    <Compile Include="View-Models\FlightSimulatorViewModel.cs" />
     <Compile Include="ITelnetClient.cs" />
     <Compile Include="View-Models\MapViewModel.cs" />
     <Compile Include="View-Models\MyControlsViewModel.cs" />
