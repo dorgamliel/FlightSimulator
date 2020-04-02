@@ -37,6 +37,7 @@ namespace FlightSimulatorApp
             mapVM = new MapViewModel(fs);
             DataContext = dash;
             map.DataContext = mapVM;
+            fs.start();
             controllers.DataContext = ctrls;
         }
 

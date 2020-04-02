@@ -11,6 +11,7 @@ namespace FlightSimulatorApp
     class MyFlightSimulator : IFlightSimulator
     {
         private ITelnetClient client;
+        private Mutex mtx = new Mutex();
         public event PropertyChangedEventHandler PropertyChanged;
 
         private double heading;
@@ -183,26 +184,27 @@ namespace FlightSimulatorApp
             {
                 while (true)
                 {
-                    client.write("get /orientation/heading-deg");
-                    heading = Double.Parse(client.read());
-                    client.write("get /velocities/vertical-speed-fps");
-                    verticalSpeed = Double.Parse(client.read());
+                    mtx.WaitOne();
+                    //client.write("get /orientation/heading-deg");
+                    //heading = Double.Parse(client.read());
+                    //client.write("get /velocities/vertical-speed-fps");
+                    //verticalSpeed = Double.Parse(client.read());
                     //client.write("get /instrumentation/heading-indicator");
                     //groundSpeed = Double.Parse(client.read());
-                    client.write("get /velocities/airspeed-kt");
-                    airSpeed = Double.Parse(client.read());
+                    //client.write("get /velocities/airspeed-kt");
+                    //airSpeed = Double.Parse(client.read());
                     //client.write("get /position/altitiude-ft");
                     //GPSAlt = Double.Parse(client.read());
-                    client.write("get /orientation/roll-deg");
-                    roll = Double.Parse(client.read());
-                    client.write("get /orientation/pitch-deg");
-                    pitch = Double.Parse(client.read());
+                    //client.write("get /orientation/roll-deg");
+                    //roll = Double.Parse(client.read());
+                    //client.write("get /orientation/pitch-deg");
+                    //pitch = Double.Parse(client.read());
                     //client.write("get /position/altitiude-ft");
                     //AltimeterAlt = Double.Parse(client.read());
                     client.write("get /position/latitude-deg");
                     latitude = Double.Parse(client.read());
-                    client.write("get /position/longitude-deg");
-                    longitude = Double.Parse(client.read());
+                    //client.write("get /position/longitude-deg");
+                    //longitude = Double.Parse(client.read());
                     /*
                      * DO WE NEED TO READ JOYSTICK AND RUDDER VALUES?
                     client.write("get /controls/engines/current-engine/throttle");
@@ -214,6 +216,7 @@ namespace FlightSimulatorApp
                     client.write("get /controls/flight/elevator");
                     elevator = Double.Parse(client.read());
                     */
+                    mtx.ReleaseMutex();
                     Thread.Sleep(250);
                 }
             }).Start();
@@ -221,26 +224,34 @@ namespace FlightSimulatorApp
 
         public void setThrottle(double val)
         {
+            mtx.WaitOne();
             client.write("set /controls/engines/current-engine/throttle " + val.ToString());
             client.read();
+            mtx.ReleaseMutex();
         }
 
         public void setAileron(double val)
         {
+            mtx.WaitOne();
             client.write("set /controls/flight/aileron " + val.ToString());
             client.read();
+            mtx.ReleaseMutex();
         }
 
         public void setRudder(double val)
         {
+            mtx.WaitOne();
             client.write("set /controls/flight/rudder " + val.ToString());
             client.read();
+            mtx.ReleaseMutex();
         }
 
         public void setElevator(double val)
         {
+            mtx.WaitOne();
             client.write("set /controls/flight/elevator " + val.ToString());
             client.read();
+            mtx.ReleaseMutex();
         }
 
         public void NotifyPropertyChanged(string propName)
