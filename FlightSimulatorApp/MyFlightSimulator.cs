@@ -209,42 +209,40 @@ namespace FlightSimulatorApp
         {
             new Thread(delegate ()
             {
-                while (true)
+                try
                 {
-                    mtx.WaitOne();
-                    client.write("get /orientation/heading-deg");
-                    Heading = (client.read());
-                    client.write("get /velocities/vertical-speed-fps");
-                    VerticalSpeed = (client.read());
-                    client.write("get /instrumentation/heading-indicator");
-                    GroundSpeed = (client.read());
-                    client.write("get /velocities/airspeed-kt");
-                    AirSpeed = (client.read());
-                    client.write("get /position/altitiude-ft");
-                    GPSAlt = (client.read());
-                    client.write("get /orientation/roll-deg");
-                    Roll = (client.read());
-                    client.write("get /orientation/pitch-deg");
-                    Pitch = (client.read());
-                    client.write("get /position/altitiude-ft");
-                    AltimeterAlt = (client.read());
-                    client.write("get /position/latitude-deg");
-                    Latitude = (client.read());
-                    client.write("get /position/longitude-deg");
-                    Longitude = (client.read());
-                    /*
-                     * DO WE NEED TO READ JOYSTICK AND RUDDER VALUES?
-                    client.write("get /controls/engines/current-engine/throttle");
-                    throttle = Double.Parse(client.read());
-                    client.write("get /controls/flight/aileron");
-                    aileron = Double.Parse(client.read());
-                    client.write("get /controls/flight/rudder");
-                    rudder = Double.Parse(client.read());
-                    client.write("get /controls/flight/elevator");
-                    elevator = Double.Parse(client.read());
-                    */
+                    while (true)
+                    {
+                        mtx.WaitOne();
+                        client.write("get /orientation/heading-deg");
+                        Heading = (client.read());
+                        client.write("get /velocities/vertical-speed-fps");
+                        VerticalSpeed = (client.read());
+                        client.write("get /instrumentation/heading-indicator");
+                        GroundSpeed = (client.read());
+                        client.write("get /velocities/airspeed-kt");
+                        AirSpeed = (client.read());
+                        client.write("get /position/altitiude-ft");
+                        GPSAlt = (client.read());
+                        client.write("get /orientation/roll-deg");
+                        Roll = (client.read());
+                        client.write("get /orientation/pitch-deg");
+                        Pitch = (client.read());
+                        client.write("get /position/altitiude-ft");
+                        AltimeterAlt = (client.read());
+                        client.write("get /position/latitude-deg");
+                        Latitude = (client.read());
+                        client.write("get /position/longitude-deg");
+                        Longitude = (client.read());
+                        mtx.ReleaseMutex();
+                        Thread.Sleep(250);
+                    }
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine(e);
+                    disconnect();
                     mtx.ReleaseMutex();
-                    Thread.Sleep(250);
                 }
             }).Start();
         }

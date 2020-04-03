@@ -43,7 +43,13 @@ namespace FlightSimulatorApp
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
-            catch (Exception){}
+            catch (NullReferenceException e){
+                Console.WriteLine(e);
+            }
+            catch (ObjectDisposedException e)
+            {
+                Console.WriteLine(e);
+            }
             return responseData;
         }
 
