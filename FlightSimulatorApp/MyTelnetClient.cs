@@ -13,9 +13,7 @@ namespace FlightSimulatorApp
         public void connect(string ip, int port)
         {
             myClient = new TcpClient();
-            var result = myClient.BeginConnect(ip, port, null, null);
-            var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
-            if (!success)
+            if (!myClient.ConnectAsync(ip, port).Wait(1000))
                 throw new Exception();
         }
 

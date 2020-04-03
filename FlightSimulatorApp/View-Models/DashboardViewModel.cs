@@ -67,5 +67,9 @@ namespace FlightSimulatorApp
         {
             get { return simulator.Message; }
         }
+        public bool VM_Connected
+        {
+            get { return simulator.Connected; }
+        }
     }
 }

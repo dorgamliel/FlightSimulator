@@ -19,6 +19,7 @@ namespace FlightSimulatorApp
         void setElevator(double val);
         bool MessageInd { get; set; }
         string Message { get; set; }
+        bool Connected { get; set; }
         string Heading { get; set; }
         string VerticalSpeed { get; set; }
         string GroundSpeed { get; set; }

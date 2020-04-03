@@ -29,8 +29,7 @@ namespace FlightSimulatorApp
         private double rudder;
         private double elevator;
         private bool connected = true;
-        
-
+        private bool isConnected = false;
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
@@ -181,6 +180,15 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Message");
             }
         }
+        public bool Connected
+        {
+            get { return isConnected; }
+            set 
+            { 
+                isConnected = value;
+                NotifyPropertyChanged("Connected");
+            }
+        }
 
         public void connect(string ip, int port)
         {
@@ -190,6 +198,7 @@ namespace FlightSimulatorApp
                 client.connect(ip, port);
                 MessageInd = true;
                 Message = "Connected to server.";
+                Connected = true;
             } catch (Exception e)
             {
                 MessageInd = true;
@@ -202,6 +211,7 @@ namespace FlightSimulatorApp
         {
             client.disconnect();
             MessageInd = true;
+            Connected = false;
             Message = "Disconnected from server.";
         }
 
