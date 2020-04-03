@@ -43,39 +43,29 @@ namespace FlightSimulatorApp
             //If user chose not to use default settings, a dialog will open for entering port and IP.
              if (checkbox.IsChecked == false)
             {
-                if ((string)Connect.Content != "Disconnect")
+                if ((string)Connect.Content == "Connect")
                 {
                     Settings lw = new Settings();
                     lw.ShowDialog();
+                    if (lw.IP == null || lw.Port == null)
+                        return;
                     fs.connect(lw.IP, Int32.Parse(lw.Port));
-                    if (dash.VM_Message == "Connected to server.")
-                    {
-                        Connect.Content = "Disconnect";
+                    if (dash.VM_Connected)
                         fs.start();
-                    }
                 }
                 else
-                {
                     fs.disconnect();
-                    Connect.Content = "Connect";
-                }
 
             }
             //Using default settings.
             else if ((string)Connect.Content == "Connect")
             {
                 fs.connect("127.0.0.1", 5402);
-                if (dash.VM_Message == "Connected to server.")
-                {
-                    Connect.Content = "Disconnect";
+                if (dash.VM_Connected)
                     fs.start();
-                }
             }
             else
-            {
                 fs.disconnect();
-                Connect.Content = "Connect";
-            }
         }
     }
 }

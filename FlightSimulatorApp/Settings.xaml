@@ -11,7 +11,8 @@
             <ColumnDefinition Width="0.01*" />
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width=".01*" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.01*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -22,9 +23,9 @@
         <TextBlock Text="Please enter an IP address and a Port number:" FontSize="10" Margin="0,5,0,0" Grid.ColumnSpan="2" Grid.Column="1"/>
         <TextBlock x:Name="t_ip" Text="IP address:" FontSize="10" Margin="0,5,0,0" Grid.Row="1" Grid.Column="1"/>
         <TextBlock x:Name="t_port" Text="Port:" FontSize="10" Margin="0,5,0,0" Grid.Row="2" Grid.Column="1"/>
-        <TextBox x:Name="b_ip" Grid.Row="1" Grid.Column="2"  Margin="20,1,90,1" BorderThickness="0.5"/>
-        <TextBox x:Name="b_port" Grid.Row="2" Grid.Column="2" Margin="20,1,90,2" BorderThickness="0.5"/>
-        <Button x:Name="ok" Content="OK" Grid.Column="2" Grid.Row="2" Width="70" HorizontalAlignment="Right" Margin="0,0,1,1" Click="ok_Click"/>
-        <TextBlock x:Name="blankArea" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" Width="86" Foreground="Red" FontSize="8" Grid.ColumnSpan="2" Margin="0,9.333,-0.333,0.333"/>
+        <TextBox x:Name="b_ip" Grid.Row="1" Grid.Column="2"  Margin="20,1,0,1" BorderThickness="0.5"/>
+        <TextBox x:Name="b_port" Grid.Row="2" Grid.Column="2" Margin="20,1,0,2" BorderThickness="0.5"/>
+        <Button x:Name="ok" Content="OK" Grid.Column="3" Grid.Row="2" Width="70" HorizontalAlignment="Right" Margin="0,0,1,1" Click="ok_Click"/>
+        <TextBlock x:Name="blankArea" Grid.Column="3" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="Red" FontSize="8"/>
     </Grid>
 </Window>
