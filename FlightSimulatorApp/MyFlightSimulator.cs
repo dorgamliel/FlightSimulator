@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,8 +24,9 @@ namespace FlightSimulatorApp
         private string roll;
         private string pitch;
         private string altimeterAlt;
-        private string latitude;
-        private string longitude;
+        private string latitude = "0";
+        private string longitude = "0";
+        private Location location;
         private double throttle;
         private double aileron;
         private double rudder;
@@ -125,6 +128,15 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Longitude");
             }
         }
+        public Location Location
+        {
+            get { return location; }
+            set
+            {
+                location = value;
+                NotifyPropertyChanged("Location");
+            }
+        }
         public double Throttle
         {
             get { return throttle; }
@@ -209,76 +221,218 @@ namespace FlightSimulatorApp
         {
             new Thread(delegate ()
             {
-                while (true)
+                try
                 {
-                    mtx.WaitOne();
-                    client.write("get /orientation/heading-deg");
-                    Heading = (client.read());
-                    client.write("get /velocities/vertical-speed-fps");
-                    VerticalSpeed = (client.read());
-                    client.write("get /instrumentation/heading-indicator");
-                    GroundSpeed = (client.read());
-                    client.write("get /velocities/airspeed-kt");
-                    AirSpeed = (client.read());
-                    client.write("get /position/altitiude-ft");
-                    GPSAlt = (client.read());
-                    client.write("get /orientation/roll-deg");
-                    Roll = (client.read());
-                    client.write("get /orientation/pitch-deg");
-                    Pitch = (client.read());
-                    client.write("get /position/altitiude-ft");
-                    AltimeterAlt = (client.read());
-                    client.write("get /position/latitude-deg");
-                    Latitude = (client.read());
-                    client.write("get /position/longitude-deg");
-                    Longitude = (client.read());
-                    /*
-                     * DO WE NEED TO READ JOYSTICK AND RUDDER VALUES?
-                    client.write("get /controls/engines/current-engine/throttle");
-                    throttle = Double.Parse(client.read());
-                    client.write("get /controls/flight/aileron");
-                    aileron = Double.Parse(client.read());
-                    client.write("get /controls/flight/rudder");
-                    rudder = Double.Parse(client.read());
-                    client.write("get /controls/flight/elevator");
-                    elevator = Double.Parse(client.read());
-                    */
+                    while (true)
+                    {
+                        mtx.WaitOne();
+                        client.write("get /orientation/heading-deg");
+                        Heading = (client.read());
+                        client.write("get /velocities/vertical-speed-fps");
+                        VerticalSpeed = (client.read());
+                        client.write("get /instrumentation/heading-indicator");
+                        GroundSpeed = (client.read());
+                        client.write("get /velocities/airspeed-kt");
+                        AirSpeed = (client.read());
+                        client.write("get /position/altitiude-ft");
+                        GPSAlt = (client.read());
+                        client.write("get /orientation/roll-deg");
+                        Roll = (client.read());
+                        client.write("get /orientation/pitch-deg");
+                        Pitch = (client.read());
+                        client.write("get /position/altitiude-ft");
+                        AltimeterAlt = (client.read());
+                        client.write("get /position/latitude-deg");
+                        Latitude = (client.read());
+                        client.write("get /position/longitude-deg");
+                        Longitude = (client.read());
+                        mtx.ReleaseMutex();
+                        Thread.Sleep(250);
+                    }
+                }
+                catch (InvalidOperationException e)
+                {
+                    MessageInd = true;
+                    Message = "Disconnected from server.";
+                    disconnect();
                     mtx.ReleaseMutex();
-                    Thread.Sleep(250);
+                }
+                catch (ArgumentNullException e)
+                {
+                    Console.WriteLine(e);
+                    disconnect();
+                    mtx.ReleaseMutex();
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine(e);
+                    disconnect();
+                    mtx.ReleaseMutex();
+                }
+                catch (TimeoutException e)
+                {
+                    //SHOW A TIMEOUT ERROR SIGNAL TO USER
+                    Console.WriteLine(e);
+                    disconnect();
+                    mtx.ReleaseMutex();
                 }
             }).Start();
         }
 
         public void setThrottle(double val)
         {
-            mtx.WaitOne();
-            client.write("set /controls/engines/current-engine/throttle " + val.ToString());
-            client.read();
-            mtx.ReleaseMutex();
+            try
+            {
+                mtx.WaitOne();
+                client.write("set /controls/engines/current-engine/throttle " + val.ToString());
+                client.read();
+                mtx.ReleaseMutex();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (TimeoutException e)
+            {
+                //SHOW A TIMEOUT ERROR SIGNAL TO USER
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
         }
 
         public void setAileron(double val)
         {
-            mtx.WaitOne();
-            client.write("set /controls/flight/aileron " + val.ToString());
-            client.read();
-            mtx.ReleaseMutex();
+            try
+            {
+                mtx.WaitOne();
+                client.write("set /controls/flight/aileron " + val.ToString());
+                client.read();
+                mtx.ReleaseMutex();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (TimeoutException e)
+            {
+                //SHOW A TIMEOUT ERROR SIGNAL TO USER
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
         }
 
         public void setRudder(double val)
         {
-            mtx.WaitOne();
-            client.write("set /controls/flight/rudder " + val.ToString());
-            client.read();
-            mtx.ReleaseMutex();
+            try
+            {
+                mtx.WaitOne();
+                client.write("set /controls/flight/rudder " + val.ToString());
+                client.read();
+                mtx.ReleaseMutex();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (TimeoutException e)
+            {
+                //SHOW A TIMEOUT ERROR SIGNAL TO USER
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
         }
 
         public void setElevator(double val)
         {
-            mtx.WaitOne();
-            client.write("set /controls/flight/elevator " + val.ToString());
-            client.read();
-            mtx.ReleaseMutex();
+            try
+            {
+                mtx.WaitOne();
+                client.write("set /controls/flight/elevator " + val.ToString());
+                client.read();
+                mtx.ReleaseMutex();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
+            catch (TimeoutException e)
+            {
+                //SHOW A TIMEOUT ERROR SIGNAL TO USER
+                Console.WriteLine(e);
+                disconnect();
+                mtx.ReleaseMutex();
+            }
         }
 
         public void NotifyPropertyChanged(string propName)

@@ -9,10 +9,11 @@ namespace FlightSimulatorApp
 {
     class MyTelnetClient : ITelnetClient
     {
-        private TcpClient myClient;
+        private TcpClient myClient = new TcpClient();
         public void connect(string ip, int port)
         {
             myClient = new TcpClient();
+            myClient.ReceiveTimeout = 10000;
             myClient.Connect(ip, port);
         }
 
@@ -23,24 +24,12 @@ namespace FlightSimulatorApp
 
         public string read()
         {
-            String responseData = String.Empty;
-            try
-            {
-                NetworkStream stream = myClient.GetStream();
-                Byte[] data = new Byte[256];
-                Int32 bytes = stream.Read(data, 0, data.Length);
-                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                Console.WriteLine("Received: {0}", responseData);
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine("ArgumentNullException: {0}", e);
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            }
-            catch (Exception){}
+            string responseData = string.Empty;
+            NetworkStream stream = myClient.GetStream();
+            Byte[] data = new Byte[256];
+            Int32 bytes = stream.Read(data, 0, data.Length);
+            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+            Console.WriteLine("Received: {0}", responseData);
             return responseData;
         }
 
@@ -48,16 +37,9 @@ namespace FlightSimulatorApp
         {
             command += "\r\n";
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
-            try
-            {
-                NetworkStream stream = myClient.GetStream();
-                stream.Write(data, 0, data.Length);
-                Console.WriteLine("Sent: {0}", command);
-            } catch(Exception e)
-            {
-
-            }
-            
+            NetworkStream stream = myClient.GetStream();
+            stream.Write(data, 0, data.Length);
+            Console.WriteLine("Sent: {0}", command);
         }
     }
 }
