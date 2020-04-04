@@ -31,8 +31,7 @@ namespace FlightSimulatorApp
         private double aileron;
         private double rudder;
         private double elevator;
-        private bool connected = true;
-        private bool isConnected = false;
+        private bool connected = false;
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
@@ -194,10 +193,10 @@ namespace FlightSimulatorApp
         }
         public bool Connected
         {
-            get { return isConnected; }
+            get { return connected; }
             set 
             { 
-                isConnected = value;
+                connected = value;
                 NotifyPropertyChanged("Connected");
             }
         }
@@ -233,7 +232,7 @@ namespace FlightSimulatorApp
             {
                 try
                 {
-                    while (true)
+                    while (Connected)
                     {
                         mtx.WaitOne();
                         client.write("get /orientation/heading-deg");
@@ -291,6 +290,10 @@ namespace FlightSimulatorApp
 
         public void setThrottle(double val)
         {
+            if (!Connected)
+            {
+                return;
+            }
             try
             {
                 mtx.WaitOne();
@@ -327,6 +330,10 @@ namespace FlightSimulatorApp
 
         public void setAileron(double val)
         {
+            if (!Connected)
+            {
+                return;
+            }
             try
             {
                 mtx.WaitOne();
@@ -369,6 +376,10 @@ namespace FlightSimulatorApp
 
         public void setRudder(double val)
         {
+            if (!Connected)
+            {
+                return;
+            }
             try
             {
                 mtx.WaitOne();
@@ -411,6 +422,10 @@ namespace FlightSimulatorApp
 
         public void setElevator(double val)
         {
+            if (!Connected)
+            {
+                return;
+            }
             try
             {
                 mtx.WaitOne();

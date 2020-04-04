@@ -14,6 +14,7 @@ namespace FlightSimulatorApp
         {
             myClient = new TcpClient();
             myClient.ReceiveTimeout = 10000;
+            myClient.SendTimeout = 10000;
             if (!myClient.ConnectAsync(ip, port).Wait(1000))
                 throw new Exception();
         }
