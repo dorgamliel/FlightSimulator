@@ -6,62 +6,60 @@
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:Views="clr-namespace:FlightSimulatorApp.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="1000" MinHeight="450" MinWidth="370">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="260*" />
-            <ColumnDefinition Width="309*" />
-            <ColumnDefinition Width="223*"/>
+            <ColumnDefinition Width="2.5*" MinWidth="100" />
+            <ColumnDefinition Width="*" MinWidth="150"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="133*" />
-            <RowDefinition Height="148*" />
-            <RowDefinition Height="116*" />
-            <RowDefinition Height="172*" />
+            <RowDefinition Height="270" />
+            <RowDefinition Height="*" MinHeight="100"/>
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="13" Center="32.0055, 34.8854" Grid.ColumnSpan="2" Grid.RowSpan="4">
+        <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="13" Center="32.0055, 34.8854" Grid.RowSpan="6" Margin="0,0,0,-0.334">
             <Grid Width="50" Height="80" 
               m:MapLayer.Position="{Binding VM_Location}" m:MapLayer.PositionOrigin="Center">
                 <Image Source="resources/plane.png">
                 </Image>
             </Grid>
         </m:Map>
-        <StackPanel Grid.Column="2" Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal" Height="35">
+        <StackPanel Grid.Column="2" Grid.RowSpan="3" Margin="0,0,0.333,0.333">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
                 <TextBlock Text="{Binding VM_Heading}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">Vertical Speed:</TextBlock>
                 <TextBlock Text="{Binding VM_VerticalSpeed}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
                 <TextBlock Text="{Binding VM_GroundSpeed}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
                 <TextBlock Text="{Binding VM_AirSpeed}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
                 <TextBlock Text="{Binding VM_GPSAlt}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
                 <TextBlock Text="{Binding VM_Roll}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
+            <StackPanel Orientation="Horizontal" Height="auto">
                 <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
                 <TextBlock Text="{Binding VM_Pitch}" FontSize="10" Padding="10"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="35">
-                <TextBlock FontSize="10" Padding="10">Altimeter Altitude (ft):</TextBlock>
+            <StackPanel Orientation="Horizontal" Height="auto">
+                <TextBlock FontSize="10" Padding="10" Margin="0,0,0,-0.333">Altimeter Altitude (ft):</TextBlock>
                 <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
             </StackPanel>
         </StackPanel>
-        <Views:MyControls x:Name="controllers" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+        <Views:MyControls x:Name="controllers" Grid.Row="1" Grid.Column="2"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0.333,-0.334" >
             <CheckBox x:Name="checkbox" IsChecked="True" Grid.Column="2" ToolTip="Use Default settings" Margin="0,5" Grid.Row="3" VerticalAlignment="Bottom" Width="19" Height="17"/>
             <TextBlock Grid.Column="2" Margin="0,5" Grid.Row="3" TextWrapping="Wrap" Text="Use Default" VerticalAlignment="Bottom" Height="18" Width="66"/>
             <Button x:Name="Connect" Grid.Column="2" Grid.Row="3" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Tunga" Width="70" Height="20" Click="Connect_Click">
@@ -76,12 +74,9 @@
                     </Style>
                 </Button.Style>
             </Button>
-
-
-
         </StackPanel>
 
-        <Canvas x:Name="msg">
+        <Canvas x:Name="msg" Grid.ColumnSpan="2" Margin="0,0,309,63" Grid.RowSpan="2">
             <Canvas.Resources>
                 <Storyboard x:Key="Appearance" Duration="00:00:00:03" AutoReverse="True" SpeedRatio="2">
                     <DoubleAnimation From="-17" To="0" Storyboard.TargetProperty="(Canvas.Top)"  FillBehavior="Stop"/>

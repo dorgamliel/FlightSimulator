@@ -9,15 +9,14 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="34"/>
             <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="34"/>
             <RowDefinition Height="7*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Name="t_Aileron" Text="Aileron" Grid.Column="2" HorizontalAlignment="Center"/>
         <TextBlock Name="t_Throttle" Text="Throttle" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">
