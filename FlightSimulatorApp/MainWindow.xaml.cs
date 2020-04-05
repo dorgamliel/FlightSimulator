@@ -42,7 +42,7 @@ namespace FlightSimulatorApp
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
             //If user chose not to use default settings, a dialog will open for entering port and IP.
-             if (checkbox.IsChecked == false)
+            if (checkbox.IsChecked == false)
             {
                 if ((string)Connect.Content == "Connect")
                 {
@@ -55,7 +55,10 @@ namespace FlightSimulatorApp
                         fs.start();
                 }
                 else
+                { 
                     fs.disconnect();
+                    fs.Message = "Disconnected from server.";
+                }
 
             }
             //Using default settings.
@@ -68,7 +71,10 @@ namespace FlightSimulatorApp
                     fs.start();
             }
             else
+            {
                 fs.disconnect();
+                fs.Message = "Disconnected from server.";
+            }
         }
     }
 }
