@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulatorApp
 {
+    enum PropName { THROTTLE, AILERON, RUDDER, ELEVATOR}
     class MyFlightSimulator : IFlightSimulator
     {
         private ITelnetClient client;
@@ -291,18 +292,41 @@ namespace FlightSimulatorApp
             }).Start();
         }
 
-        public void setThrottle(double val)
+        public void setProp(double val, string propName)
         {
-            if (!Connected)
-            {
-                return;
-            }
             try
             {
-                mtx.WaitOne();
-                client.write("set /controls/engines/current-engine/throttle " + val.ToString());
-                client.read();
-                mtx.ReleaseMutex();
+                propName = propName.ToUpper();
+                PropName prop = (PropName)Enum.Parse(typeof(PropName), propName);
+                switch (prop)
+                {
+                    case PropName.THROTTLE:
+                        mtx.WaitOne();
+                        client.write("set /controls/engines/current-engine/throttle " + val.ToString());
+                        client.read();
+                        mtx.ReleaseMutex();
+                        break;
+                    case PropName.AILERON:
+                        mtx.WaitOne();
+                        client.write("set /controls/flight/aileron " + val.ToString());
+                        client.read();
+                        mtx.ReleaseMutex();
+                        break;
+                    case PropName.RUDDER:
+                        mtx.WaitOne();
+                        client.write("set /controls/flight/rudder " + val.ToString());
+                        client.read();
+                        mtx.ReleaseMutex();
+                        break;
+                    case PropName.ELEVATOR:
+                        mtx.WaitOne();
+                        client.write("set /controls/flight/elevator " + val.ToString());
+                        client.read();
+                        mtx.ReleaseMutex();
+                        break;
+                    default:
+                        break;
+                }
             }
             catch (InvalidOperationException e)
             {
@@ -329,137 +353,10 @@ namespace FlightSimulatorApp
                 disconnect();
                 mtx.ReleaseMutex();
             }
-        }
-
-        public void setAileron(double val)
-        {
-            if (!Connected)
-            {
-                return;
-            }
-            try
-            {
-                mtx.WaitOne();
-                client.write("set /controls/flight/aileron " + val.ToString());
-                client.read();
-                mtx.ReleaseMutex();
-            }
-            catch (InvalidOperationException e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e);
                 disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (TimeoutException e)
-            {
-                //SHOW A TIMEOUT ERROR SIGNAL TO USER
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (System.NullReferenceException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-        }
-
-        public void setRudder(double val)
-        {
-            if (!Connected)
-            {
-                return;
-            }
-            try
-            {
-                mtx.WaitOne();
-                client.write("set /controls/flight/rudder " + val.ToString());
-                client.read();
-                mtx.ReleaseMutex();
-            }
-            catch (InvalidOperationException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (TimeoutException e)
-            {
-                //SHOW A TIMEOUT ERROR SIGNAL TO USER
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (System.NullReferenceException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-        }
-
-        public void setElevator(double val)
-        {
-            if (!Connected)
-            {
-                return;
-            }
-            try
-            {
-                mtx.WaitOne();
-                client.write("set /controls/flight/elevator " + val.ToString());
-                client.read();
-                mtx.ReleaseMutex();
-            }
-            catch (InvalidOperationException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (ArgumentNullException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
-            }
-            catch (TimeoutException e)
-            {
-                //SHOW A TIMEOUT ERROR SIGNAL TO USER
-                Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
             }
         }
 

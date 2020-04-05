@@ -29,28 +29,28 @@ namespace FlightSimulatorApp
         {
             set
             {
-                simulator.setThrottle(value);
+                simulator.setProp(value, "throttle");
             }
         }
         public double VM_aileron
         {
             set
             {
-                simulator.setAileron(value);
+                simulator.setProp(value, "aileron");
             }
         }
         public double VM_rudder
         {
             set
             {
-                simulator.setRudder(value);
+                simulator.setProp(value, "rudder");
             }
         }
         public double VM_elevator
         {
             set
             {
-                simulator.setElevator(value);
+                simulator.setProp(value, "elevator");
             }
         }
         public bool VM_MessageInd
