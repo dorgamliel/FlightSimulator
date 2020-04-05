@@ -330,7 +330,7 @@ namespace FlightSimulatorApp
             }
             catch (TimeoutException e)
             {
-                //SHOW A TIMEOUT ERROR SIGNAL TO USER
+                ///SHOW A TIMEOUT ERROR SIGNAL TO USER
                 Console.WriteLine(e);
                 disconnect();
                 mtx.ReleaseMutex();
