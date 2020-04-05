@@ -13,7 +13,7 @@ _Contributors_: Alonsho, dorgamliel.
 This app consists of three main components:
 1. Controllers - Controlling the plane is now simple with navigation controllers, including throttle, aileron, elevator and rudder
 2. Dashbaord - a detailed dashboard with real-time plane data.
-3. Map - A map (powered by Bing Maps) which shows current location of plane, and updates regularly it's location on the map.
+3. Map - A map (powered by Bing Maps) which shows current location of the plane, and updates regularly it's location on the map.
 Combining these three main components (and some extra tweaks), this app is whole and reliable.
 
 
