@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,7 +61,9 @@ namespace FlightSimulatorApp
             //Using default settings.
             else if ((string)Connect.Content == "Connect")
             {
-                fs.connect("127.0.0.1", 5402);
+                int defaultPort = Int32.Parse(ConfigurationManager.AppSettings["port"].ToString());
+                string defaultIP = ConfigurationManager.AppSettings["ip"].ToString();
+                fs.connect(defaultIP, defaultPort);
                 if (dash.VM_Connected)
                     fs.start();
             }

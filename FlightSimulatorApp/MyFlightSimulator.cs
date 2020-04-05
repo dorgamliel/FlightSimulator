@@ -35,6 +35,7 @@ namespace FlightSimulatorApp
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
+            resetDashboard();
         }
         public string Heading
         {
@@ -213,6 +214,7 @@ namespace FlightSimulatorApp
             } catch (Exception e)
             {
                 MessageInd = true;
+                Connected = false;
                 Message = "Unable to connect to server.";
             }
             
@@ -223,6 +225,7 @@ namespace FlightSimulatorApp
             client.disconnect();
             MessageInd = true;
             Connected = false;
+            resetDashboard();
             Message = "Disconnected from server.";
         }
 
@@ -466,6 +469,17 @@ namespace FlightSimulatorApp
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+        public void resetDashboard()
+        {
+            Heading = "0";
+            VerticalSpeed = "0";
+            GroundSpeed = "0";
+            AirSpeed = "0";
+            GPSAlt = "0";
+            Roll = "0";
+            Pitch = "0";
+            AltimeterAlt = "0";
         }
 
     }
