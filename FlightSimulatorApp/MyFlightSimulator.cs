@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maps.MapControl.WPF;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -33,6 +34,8 @@ namespace FlightSimulatorApp
         private double rudder;
         private double elevator;
         private bool connected = false;
+        private string ip;
+        private int port;
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
@@ -224,9 +227,9 @@ namespace FlightSimulatorApp
         public void disconnect()
         {
             client.disconnect();
+            resetDashboard();
             MessageInd = true;
             Connected = false;
-            resetDashboard();
             Message = "Disconnected from server.";
         }
 
@@ -287,6 +290,13 @@ namespace FlightSimulatorApp
                     //SHOW A TIMEOUT ERROR SIGNAL TO USER
                     Console.WriteLine(e);
                     disconnect();
+                    mtx.ReleaseMutex();
+                }
+                catch (IOException e)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
                     mtx.ReleaseMutex();
                 }
             }).Start();
