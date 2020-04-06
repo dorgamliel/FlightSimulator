@@ -34,6 +34,7 @@ namespace FlightSimulatorApp
         private double rudder;
         private double elevator;
         private bool connected = false;
+        private bool messageInd = false;
         private string ip;
         private int port;
         public MyFlightSimulator(ITelnetClient client)
@@ -179,10 +180,10 @@ namespace FlightSimulatorApp
         }
         public bool MessageInd
         {
-            get { return connected; }
+            get { return messageInd; }
             set
             {
-                connected = value;
+                messageInd = value;
                 NotifyPropertyChanged("MessageInd");
             }
         }
@@ -268,28 +269,30 @@ namespace FlightSimulatorApp
                 }
                 catch (InvalidOperationException e)
                 {
-                    MessageInd = true;
-                    Message = "Disconnected from server.";
                     disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
                     mtx.ReleaseMutex();
                 }
                 catch (ArgumentNullException e)
                 {
-                    Console.WriteLine(e);
                     disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
                     mtx.ReleaseMutex();
                 }
                 catch (SocketException e)
                 {
-                    Console.WriteLine(e);
                     disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
                     mtx.ReleaseMutex();
                 }
                 catch (TimeoutException e)
                 {
-                    //SHOW A TIMEOUT ERROR SIGNAL TO USER
-                    Console.WriteLine(e);
                     disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
                     mtx.ReleaseMutex();
                 }
                 catch (IOException e)
@@ -341,32 +344,35 @@ namespace FlightSimulatorApp
             catch (InvalidOperationException e)
             {
                 Console.WriteLine(e);
-                disconnect();
-                mtx.ReleaseMutex();
+                //mtx.ReleaseMutex();
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine(e);
                 disconnect();
+                Message = "Server terminated unexpectedly.";
+                MessageInd = true;
                 mtx.ReleaseMutex();
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e);
                 disconnect();
+                Message = "Server terminated unexpectedly.";
+                MessageInd = true;
                 mtx.ReleaseMutex();
             }
             catch (TimeoutException e)
             {
-                //SHOW A TIMEOUT ERROR SIGNAL TO USER
-                Console.WriteLine(e);
                 disconnect();
+                Message = "Server terminated unexpectedly.";
+                MessageInd = true;
                 mtx.ReleaseMutex();
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine(e);
                 disconnect();
+                Message = "Server terminated unexpectedly.";
+                MessageInd = true;
+                mtx.ReleaseMutex();
             }
         }
 
