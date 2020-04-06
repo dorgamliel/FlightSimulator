@@ -26,6 +26,7 @@ namespace FlightSimulatorApp
         MyControlsViewModel ctrls;
         DashboardViewModel dash;
         MapViewModel mapVM;
+        ConnectionViewModel cvm;
         IFlightSimulator fs;
         public MainWindow1()
         {
@@ -35,46 +36,11 @@ namespace FlightSimulatorApp
             dash = new DashboardViewModel(fs);
             ctrls = new MyControlsViewModel(fs);
             mapVM = new MapViewModel(fs);
+            cvm = new ConnectionViewModel(fs);
             DataContext = dash;
             map.DataContext = mapVM;
             controllers.DataContext = ctrls;
-        }
-        private void Connect_Click(object sender, RoutedEventArgs e)
-        {
-            //If user chose not to use default settings, a dialog will open for entering port and IP.
-            if (checkbox.IsChecked == false)
-            {
-                if ((string)Connect.Content == "Connect")
-                {
-                    Settings lw = new Settings();
-                    lw.ShowDialog();
-                    if (lw.IP == null || lw.Port == null)
-                        return;
-                    fs.connect(lw.IP, Int32.Parse(lw.Port));
-                    if (dash.VM_Connected)
-                        fs.start();
-                }
-                else
-                { 
-                    fs.disconnect();
-                    fs.Message = "Disconnected from server.";
-                }
-
-            }
-            //Using default settings.
-            else if ((string)Connect.Content == "Connect")
-            {
-                int defaultPort = Int32.Parse(ConfigurationManager.AppSettings["port"].ToString());
-                string defaultIP = ConfigurationManager.AppSettings["ip"].ToString();
-                fs.connect(defaultIP, defaultPort);
-                if (dash.VM_Connected)
-                    fs.start();
-            }
-            else
-            {
-                fs.disconnect();
-                fs.Message = "Disconnected from server.";
-            }
+            connect_button.DataContext = cvm;
         }
     }
 }

@@ -65,11 +65,6 @@ namespace FlightSimulatorApp.UserControls
                 }
                 X = knobPosition.X / (innerCircle.ActualWidth / 2);
                 Y = knobPosition.Y / (innerCircle.ActualHeight / 2);
-                /*
-                var vm = new MyControlsViewModel(new MyFlightSimulator());
-                vm.VM_rudder = knobPosition.X / (innerCircle.ActualWidth / 2);
-                vm.VM_elevator = knobPosition.Y / (innerCircle.ActualHeight / 2);
-                */
             }
         }
         private void Knob_MouseUp(object sender, MouseButtonEventArgs e)

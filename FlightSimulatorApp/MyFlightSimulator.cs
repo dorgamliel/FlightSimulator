@@ -33,6 +33,8 @@ namespace FlightSimulatorApp
         private double rudder;
         private double elevator;
         private bool connected = false;
+        private string ip;
+        private int port;
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
@@ -224,9 +226,10 @@ namespace FlightSimulatorApp
         public void disconnect()
         {
             client.disconnect();
-            Connected = false;
             resetDashboard();
             MessageInd = true;
+            Connected = false;
+            Message = "Disconnected from server.";
         }
 
         public void start()
@@ -292,6 +295,7 @@ namespace FlightSimulatorApp
                 {
                     disconnect();
                     Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
                     mtx.ReleaseMutex();
                 }
             }).Start();
