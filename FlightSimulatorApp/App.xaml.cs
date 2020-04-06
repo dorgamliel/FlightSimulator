@@ -26,6 +26,7 @@ namespace FlightSimulatorApp
             wnd.dash.DataContext = new DashboardViewModel(fs);
             wnd.map.DataContext = new MapViewModel(fs);
             wnd.controllers.DataContext = new MyControlsViewModel(fs);
+            wnd.connect_button.DataContext = new ConnectionViewModel(fs);
             wnd.Show();
         }
 

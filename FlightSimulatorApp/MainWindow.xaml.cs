@@ -28,9 +28,6 @@ namespace FlightSimulatorApp
         public MainWindow()
         {
             InitializeComponent();
-            map.DataContext = mapVM;
-            controllers.DataContext = ctrls;
-            connect_button.DataContext = cvm;
         }
     }
 }
