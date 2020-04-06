@@ -263,6 +263,7 @@ namespace FlightSimulatorApp
                         Latitude = (client.read());
                         client.write("get /position/longitude-deg");
                         Longitude = (client.read());
+                        NotifyPropertyChanged("Location");
                         mtx.ReleaseMutex();
                         Thread.Sleep(250);
                     }
