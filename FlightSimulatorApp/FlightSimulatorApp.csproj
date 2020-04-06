@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="View-Models\DashboardViewModel.cs" />
     <Compile Include="ITelnetClient.cs" />
+    <Compile Include="View-Models\MainViewModel.cs" />
     <Compile Include="View-Models\MapViewModel.cs" />
     <Compile Include="View-Models\MyControlsViewModel.cs" />
     <Compile Include="MyFlightSimulator.cs" />

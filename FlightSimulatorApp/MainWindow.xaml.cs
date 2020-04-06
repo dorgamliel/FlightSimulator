@@ -15,27 +15,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlightSimulatorApp.View_Models;
 
 namespace FlightSimulatorApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow1 : Window
+    public partial class MainWindow : Window
     {
-        MyControlsViewModel ctrls;
-        DashboardViewModel dash;
-        MapViewModel mapVM;
-        IFlightSimulator fs;
-        public MainWindow1()
+
+        public MainWindow()
         {
             InitializeComponent();
-            MyTelnetClient client = new MyTelnetClient();
-            fs = new MyFlightSimulator(client);
-            dash = new DashboardViewModel(fs);
-            ctrls = new MyControlsViewModel(fs);
-            mapVM = new MapViewModel(fs);
-            DataContext = dash;
             map.DataContext = mapVM;
             controllers.DataContext = ctrls;
         }
@@ -51,7 +43,7 @@ namespace FlightSimulatorApp
                     if (lw.IP == null || lw.Port == null)
                         return;
                     fs.connect(lw.IP, Int32.Parse(lw.Port));
-                    if (dash.VM_Connected)
+                    if (VM.VM_Connected)
                         fs.start();
                 }
                 else
@@ -64,7 +56,7 @@ namespace FlightSimulatorApp
                 int defaultPort = Int32.Parse(ConfigurationManager.AppSettings["port"].ToString());
                 string defaultIP = ConfigurationManager.AppSettings["ip"].ToString();
                 fs.connect(defaultIP, defaultPort);
-                if (dash.VM_Connected)
+                if (VM.VM_Connected)
                     fs.start();
             }
             else

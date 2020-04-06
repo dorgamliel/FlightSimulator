@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulatorApp
 {
-    interface IFlightSimulator : INotifyPropertyChanged
+    public interface IFlightSimulator : INotifyPropertyChanged
     {
         //connection to simulator.
         void connect(string ip, int port);

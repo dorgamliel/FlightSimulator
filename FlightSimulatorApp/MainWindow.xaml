@@ -1,4 +1,4 @@
-﻿<Window x:Class="FlightSimulatorApp.MainWindow1"
+﻿<Window x:Class="FlightSimulatorApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,7 +24,7 @@
                 </Image>
             </Grid>
         </m:Map>
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" x:Name="dash">
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
                 <TextBlock Text="{Binding VM_Heading}" FontSize="10" Padding="10"/>
