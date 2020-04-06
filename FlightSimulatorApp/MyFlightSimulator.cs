@@ -304,6 +304,12 @@ namespace FlightSimulatorApp
 
         public void setProp(double val, string propName)
         {
+            
+            if (!Connected)
+            {
+                return;
+            }
+            
             try
             {
                 propName = propName.ToUpper();
