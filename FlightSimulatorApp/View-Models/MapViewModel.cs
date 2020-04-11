@@ -43,7 +43,7 @@ namespace FlightSimulatorApp
             {
                 try
                 {
-                    return new Location(Double.Parse(simulator.Longitude), Double.Parse(simulator.Latitude));
+                    return new Location(Double.Parse(simulator.Latitude), Double.Parse(simulator.Longitude));
                 } catch (Exception)
                 {
                     return new Location(0, 0);

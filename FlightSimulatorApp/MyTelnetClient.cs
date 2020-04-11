@@ -26,6 +26,7 @@ namespace FlightSimulatorApp
 
         public string read()
         {
+            //TODO: remove printing to console
             string responseData = string.Empty;
             NetworkStream stream = myClient.GetStream();
             Byte[] data = new Byte[256];
@@ -37,6 +38,7 @@ namespace FlightSimulatorApp
 
         public void write(string command)
         {
+            //TODO: remove printing to console
             command += "\r\n";
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
             NetworkStream stream = myClient.GetStream();

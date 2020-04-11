@@ -35,11 +35,14 @@ namespace FlightSimulatorApp
         private double elevator;
         private bool connected = false;
         private bool messageInd = false;
+        private Queue<String> setCommands;
         private string ip;
         private int port;
+
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
+            this.setCommands = new Queue<string>();
             resetDashboard();
         }
         public string Heading
@@ -119,7 +122,24 @@ namespace FlightSimulatorApp
             get { return latitude; }
             set
             {
-                latitude = value;
+                try
+                {
+                    if (Double.Parse(value) > 85)
+                    {
+                        latitude = "85";
+                    }
+                    else if (Double.Parse(value) < -85)
+                    {
+                        latitude = "-85";
+                    }
+                    else
+                    {
+                        latitude = value;
+                    }
+                } catch(Exception)
+                {
+                    latitude = "0";
+                }
                 NotifyPropertyChanged("Latitude");
             }
         }
@@ -128,7 +148,25 @@ namespace FlightSimulatorApp
             get { return longitude; }
             set
             {
-                longitude = value;
+                try
+                {
+                    if (Double.Parse(value) > 180)
+                    {
+                        longitude = "180";
+                    }
+                    else if (Double.Parse(value) < -180)
+                    {
+                        longitude = "-180";
+                    }
+                    else
+                    {
+                        longitude = value;
+                    }
+                }
+                catch (Exception)
+                {
+                    longitude = "0";
+                }
                 NotifyPropertyChanged("Longitude");
             }
         }
@@ -147,6 +185,7 @@ namespace FlightSimulatorApp
             set
             {
                 throttle = value;
+                setCommands.Enqueue("set /controls/engines/current-engine/throttle " + value.ToString());
                 NotifyPropertyChanged("Throttle");
             }
         }
@@ -156,6 +195,7 @@ namespace FlightSimulatorApp
             set
             {
                 aileron = value;
+                setCommands.Enqueue("set /controls/flight/aileron " + value.ToString());
                 NotifyPropertyChanged("Aileron");
                 
             }
@@ -166,6 +206,7 @@ namespace FlightSimulatorApp
             set
             {
                 rudder = value;
+                setCommands.Enqueue("set /controls/flight/rudder " + value.ToString());
                 NotifyPropertyChanged("Rudder");
             }
         }
@@ -175,6 +216,7 @@ namespace FlightSimulatorApp
             set
             {
                 elevator = value;
+                setCommands.Enqueue("set /controls/flight/elevator " + value.ToString());
                 NotifyPropertyChanged("Elevator");
             }
         }
@@ -229,6 +271,7 @@ namespace FlightSimulatorApp
         {
             client.disconnect();
             resetDashboard();
+            this.setCommands.Clear();
             MessageInd = true;
             Connected = false;
             Message = "Disconnected from server.";
@@ -238,26 +281,28 @@ namespace FlightSimulatorApp
         {
             new Thread(delegate ()
             {
+                //TODO: put set prop in a thread with a queue and run from here
+                StartClient();
                 try
                 {
                     while (Connected)
                     {
                         mtx.WaitOne();
-                        client.write("get /orientation/heading-deg");
+                        client.write("get /instrumentation/heading-indicator/indicated-heading-deg");
                         Heading = (client.read());
-                        client.write("get /velocities/vertical-speed-fps");
+                        client.write("get /instrumentation/gps/indicated-vertical-speed");
                         VerticalSpeed = (client.read());
-                        client.write("get /instrumentation/heading-indicator");
+                        client.write("get /instrumentation/gps/indicated-ground-speed-kt");
                         GroundSpeed = (client.read());
-                        client.write("get /velocities/airspeed-kt");
+                        client.write("get /instrumentation/airspeed-indicator/indicated-speed-kt");
                         AirSpeed = (client.read());
-                        client.write("get /position/altitiude-ft");
+                        client.write("get /instrumentation/gps/indicated-altitude-ft");
                         GPSAlt = (client.read());
-                        client.write("get /orientation/roll-deg");
+                        client.write("get /instrumentation/attitude-indicator/internal-roll-deg");
                         Roll = (client.read());
-                        client.write("get /orientation/pitch-deg");
+                        client.write("get /instrumentation/attitude-indicator/internal-pitch-deg");
                         Pitch = (client.read());
-                        client.write("get /position/altitiude-ft");
+                        client.write("get /instrumentation/altimeter/indicated-altitude-ft");
                         AltimeterAlt = (client.read());
                         client.write("get /position/latitude-deg");
                         Latitude = (client.read());
@@ -306,81 +351,155 @@ namespace FlightSimulatorApp
             }).Start();
         }
 
-        public void setProp(double val, string propName)
+        public void StartClient()
         {
-            
-            if (!Connected)
+            new Thread(delegate ()
             {
-                return;
-            }
-            
-            try
-            {
-                propName = propName.ToUpper();
-                PropName prop = (PropName)Enum.Parse(typeof(PropName), propName);
-                switch (prop)
+                while (Connected)
                 {
-                    case PropName.THROTTLE:
-                        mtx.WaitOne();
-                        client.write("set /controls/engines/current-engine/throttle " + val.ToString());
+                    mtx.WaitOne();
+                    if (this.setCommands.Count == 0)
+                    {
+                        mtx.ReleaseMutex();
+                        continue;
+                    }
+                    try
+                    {
+                        String command = this.setCommands.Dequeue();
+                        client.write(command);
                         client.read();
                         mtx.ReleaseMutex();
-                        break;
-                    case PropName.AILERON:
-                        mtx.WaitOne();
-                        client.write("set /controls/flight/aileron " + val.ToString());
-                        client.read();
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
                         mtx.ReleaseMutex();
-                        break;
-                    case PropName.RUDDER:
-                        mtx.WaitOne();
-                        client.write("set /controls/flight/rudder " + val.ToString());
-                        client.read();
+                    }
+                    catch (ArgumentNullException e)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
                         mtx.ReleaseMutex();
-                        break;
-                    case PropName.ELEVATOR:
-                        mtx.WaitOne();
-                        client.write("set /controls/flight/elevator " + val.ToString());
-                        client.read();
+                    }
+                    catch (SocketException e)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
                         mtx.ReleaseMutex();
-                        break;
-                    default:
-                        break;
+                    }
+                    catch (TimeoutException e)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
+                        mtx.ReleaseMutex();
+                    }
+                    catch (ArgumentException e)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
+                        mtx.ReleaseMutex();
+                    }
+                    catch (IOException)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
+                        mtx.ReleaseMutex();
+                    }
                 }
-            }
-            catch (InvalidOperationException e)
-            {
-                Console.WriteLine(e);
-                //mtx.ReleaseMutex();
-            }
-            catch (ArgumentNullException e)
-            {
-                disconnect();
-                Message = "Server terminated unexpectedly.";
-                MessageInd = true;
-                mtx.ReleaseMutex();
-            }
-            catch (SocketException e)
-            {
-                disconnect();
-                Message = "Server terminated unexpectedly.";
-                MessageInd = true;
-                mtx.ReleaseMutex();
-            }
-            catch (TimeoutException e)
-            {
-                disconnect();
-                Message = "Server terminated unexpectedly.";
-                MessageInd = true;
-                mtx.ReleaseMutex();
-            }
-            catch (ArgumentException e)
-            {
-                disconnect();
-                Message = "Server terminated unexpectedly.";
-                MessageInd = true;
-                mtx.ReleaseMutex();
-            }
+
+
+
+
+                /*
+                mtx.WaitOne();
+                if (!Connected)
+                {
+                    mtx.ReleaseMutex();
+                    return;
+                }
+
+                try
+                {
+
+                    propName = propName.ToUpper();
+                    PropName prop = (PropName)Enum.Parse(typeof(PropName), propName);
+                    switch (prop)
+                    {
+                        case PropName.THROTTLE:
+                            client.write("set /controls/engines/current-engine/throttle " + val.ToString());
+                            client.read();
+                            mtx.ReleaseMutex();
+                            break;
+                        case PropName.AILERON:
+                            client.write("set /controls/flight/aileron " + val.ToString());
+                            client.read();
+                            mtx.ReleaseMutex();
+                            break;
+                        case PropName.RUDDER:
+                            client.write("set /controls/flight/rudder " + val.ToString());
+                            client.read();
+                            mtx.ReleaseMutex();
+                            break;
+                        case PropName.ELEVATOR:
+                            client.write("set /controls/flight/elevator " + val.ToString());
+                            client.read();
+                            mtx.ReleaseMutex();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch (InvalidOperationException e)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
+                    mtx.ReleaseMutex();
+                }
+                catch (ArgumentNullException e)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
+                    mtx.ReleaseMutex();
+                }
+                catch (SocketException e)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
+                    mtx.ReleaseMutex();
+                }
+                catch (TimeoutException e)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
+                    mtx.ReleaseMutex();
+                }
+                catch (ArgumentException e)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
+                    mtx.ReleaseMutex();
+                }
+                catch (IOException)
+                {
+                    disconnect();
+                    Message = "Server terminated unexpectedly.";
+                    MessageInd = true;
+                    mtx.ReleaseMutex();
+                }
+                */
+            }).Start();
         }
 
         public void NotifyPropertyChanged(string propName)
