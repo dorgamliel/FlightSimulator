@@ -64,7 +64,7 @@ namespace FlightSimulatorApp.UserControls
                     knobPosition.Y = -rad * Math.Sin(angle);
                 }
                 X = knobPosition.X / (innerCircle.ActualWidth / 2);
-                Y = - (knobPosition.Y / (innerCircle.ActualHeight / 2));
+                Y = knobPosition.Y / (innerCircle.ActualHeight / 2);
             }
         }
         private void Knob_MouseUp(object sender, MouseButtonEventArgs e)
