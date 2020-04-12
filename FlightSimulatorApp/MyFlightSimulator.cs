@@ -269,6 +269,10 @@ namespace FlightSimulatorApp
 
         public void disconnect()
         {
+            if (!Connected)
+            {
+                return;
+            }
             client.disconnect();
             resetDashboard();
             this.setCommands.Clear();
@@ -281,7 +285,6 @@ namespace FlightSimulatorApp
         {
             new Thread(delegate ()
             {
-                //TODO: put set prop in a thread with a queue and run from here
                 StartClient();
                 try
                 {
@@ -315,9 +318,12 @@ namespace FlightSimulatorApp
                 }
                 catch (InvalidOperationException e)
                 {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
+                    if (Connected)
+                    {
+                        disconnect();
+                        Message = "Server terminated unexpectedly.";
+                        MessageInd = true;
+                    }
                     mtx.ReleaseMutex();
                 }
                 catch (ArgumentNullException e)
@@ -334,17 +340,17 @@ namespace FlightSimulatorApp
                     MessageInd = true;
                     mtx.ReleaseMutex();
                 }
-                catch (TimeoutException e)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
                 catch (IOException e)
                 {
                     disconnect();
-                    Message = "Server terminated unexpectedly.";
+                    if (e.Message.Contains("connected party did not properly respond after a period of time"))
+                    {
+                        Message = "Server timed out. Disconnected";
+                    }
+                    else
+                    {
+                        Message = "Server terminated unexpectedly.";
+                    }
                     MessageInd = true;
                     mtx.ReleaseMutex();
                 }
@@ -405,10 +411,17 @@ namespace FlightSimulatorApp
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
-                    catch (IOException)
+                    catch (IOException e)
                     {
                         disconnect();
-                        Message = "Server terminated unexpectedly.";
+                        if (e.Message.Contains("connected party did not properly respond after a period of time"))
+                        {
+                            Message = "Server timed out. Disconnected";
+                        }
+                        else
+                        {
+                            Message = "Server terminated unexpectedly.";
+                        }
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
