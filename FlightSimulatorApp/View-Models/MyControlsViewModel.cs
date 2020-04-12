@@ -25,28 +25,28 @@ namespace FlightSimulatorApp
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public double VM_throttle
+        public double VM_Throttle
         {
             set
             {
                 simulator.Throttle = value;
             }
         }
-        public double VM_aileron
+        public double VM_Aileron
         {
             set
             {
                 simulator.Aileron = value;
             }
         }
-        public double VM_rudder
+        public double VM_Rudder
         {
             set
             {
                 simulator.Rudder = value;
             }
         }
-        public double VM_elevator
+        public double VM_Elevator
         {
             set
             {

@@ -37,7 +37,7 @@ namespace FlightSimulatorApp.UserControls
         {
             Storyboard sb = (Storyboard)Knob.FindResource("CenterKnob");
             sb.Stop();
-            resetKnobPosition();
+            ResetKnobPosition();
         }
 
         private void Knob_MouseMove(object sender, MouseEventArgs e)
@@ -47,7 +47,7 @@ namespace FlightSimulatorApp.UserControls
                 double rad = innerCircle.ActualWidth / 2;
                 Point knobLocation = e.GetPosition(this);
                 //length of line from middle point of controller to mouse location.
-                double length = lineLength(knobLocation.X, knobLocation.Y, userControl.ActualWidth / 2, userControl.ActualHeight / 2);
+                double length = LineLength(knobLocation.X, knobLocation.Y, userControl.ActualWidth / 2, userControl.ActualHeight / 2);
                 //If knob is within inner circle, change axes freely (according to mouse location).
                 if (length < innerCircle.Width / 2)
                 {
@@ -58,7 +58,7 @@ namespace FlightSimulatorApp.UserControls
                 else
                 {
                     //calculate angel based on middle point of circle and current mouse location on screen.
-                    double angle = getAngle(userControl.ActualWidth / 2, userControl.ActualHeight / 2, knobLocation.X, knobLocation.Y);
+                    double angle = GetAngle(userControl.ActualWidth / 2, userControl.ActualHeight / 2, knobLocation.X, knobLocation.Y);
                     //Change knob placement along circle border.
                     knobPosition.X = rad * Math.Cos(angle);
                     knobPosition.Y = -rad * Math.Sin(angle);
@@ -76,15 +76,15 @@ namespace FlightSimulatorApp.UserControls
             Storyboard sb = (Storyboard)Knob.FindResource("CenterKnob");
             sb.Begin();
         }
-        public double lineLength(double x, double y, double x1, double y1)
+        public double LineLength(double x, double y, double x1, double y1)
         {
             return Math.Sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
         }
-        public double getAngle(double x, double y, double x1, double y1)
+        public double GetAngle(double x, double y, double x1, double y1)
         {
             return -Math.Atan2(y1 - y, x1 - x);
         }
-        private void resetKnobPosition()
+        private void ResetKnobPosition()
         {
             knobPosition.X = 0;
             knobPosition.Y = 0;

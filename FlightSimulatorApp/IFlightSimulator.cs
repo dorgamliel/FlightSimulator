@@ -10,9 +10,9 @@ namespace FlightSimulatorApp
     public interface IFlightSimulator : INotifyPropertyChanged
     {
         //connection to simulator.
-        void connect(string ip, int port);
-        void disconnect();
-        void start();
+        void Connect(string ip, int port);
+        void Disconnect();
+        void Start();
         void StartClient();
         bool MessageInd { get; set; }
         string Message { get; set; }

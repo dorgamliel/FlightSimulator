@@ -27,15 +27,15 @@ namespace FlightSimulatorApp
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public void VM_connect(string ip, int port)
+        public void VM_Connect(string ip, int port)
         {
-            simulator.connect(ip, port);
+            simulator.Connect(ip, port);
             if (VM_Connected)
-                simulator.start();
+                simulator.Start();
         }
-        public void VM_disconnect()
+        public void VM_Disconnect()
         {
-            simulator.disconnect();
+            simulator.Disconnect();
         }
         public bool VM_Connected
         {

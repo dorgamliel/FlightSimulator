@@ -43,7 +43,7 @@ namespace FlightSimulatorApp
         {
             this.client = client;
             this.setCommands = new Queue<string>();
-            resetDashboard();
+            ResetDashboard();
         }
         public string Heading
         {
@@ -249,12 +249,12 @@ namespace FlightSimulatorApp
             }
         }
 
-        public void connect(string ip, int port)
+        public void Connect(string ip, int port)
         {
             client = new MyTelnetClient();
             try
             {
-                client.connect(ip, port);
+                client.Connect(ip, port);
                 MessageInd = true;
                 Message = "Connected to server.";
                 Connected = true;
@@ -267,21 +267,21 @@ namespace FlightSimulatorApp
             
         }
 
-        public void disconnect()
+        public void Disconnect()
         {
             if (!Connected)
             {
                 return;
             }
-            client.disconnect();
-            resetDashboard();
+            client.Disconnect();
+            ResetDashboard();
             this.setCommands.Clear();
             MessageInd = true;
             Connected = false;
             Message = "Disconnected from server.";
         }
 
-        public void start()
+        public void Start()
         {
             new Thread(delegate ()
             {
@@ -291,26 +291,26 @@ namespace FlightSimulatorApp
                     while (Connected)
                     {
                         mtx.WaitOne();
-                        client.write("get /instrumentation/heading-indicator/indicated-heading-deg");
-                        Heading = (client.read());
-                        client.write("get /instrumentation/gps/indicated-vertical-speed");
-                        VerticalSpeed = (client.read());
-                        client.write("get /instrumentation/gps/indicated-ground-speed-kt");
-                        GroundSpeed = (client.read());
-                        client.write("get /instrumentation/airspeed-indicator/indicated-speed-kt");
-                        AirSpeed = (client.read());
-                        client.write("get /instrumentation/gps/indicated-altitude-ft");
-                        GPSAlt = (client.read());
-                        client.write("get /instrumentation/attitude-indicator/internal-roll-deg");
-                        Roll = (client.read());
-                        client.write("get /instrumentation/attitude-indicator/internal-pitch-deg");
-                        Pitch = (client.read());
-                        client.write("get /instrumentation/altimeter/indicated-altitude-ft");
-                        AltimeterAlt = (client.read());
-                        client.write("get /position/latitude-deg");
-                        Latitude = (client.read());
-                        client.write("get /position/longitude-deg");
-                        Longitude = (client.read());
+                        client.Write("get /instrumentation/heading-indicator/indicated-heading-deg");
+                        Heading = (client.Read());
+                        client.Write("get /instrumentation/gps/indicated-vertical-speed");
+                        VerticalSpeed = (client.Read());
+                        client.Write("get /instrumentation/gps/indicated-ground-speed-kt");
+                        GroundSpeed = (client.Read());
+                        client.Write("get /instrumentation/airspeed-indicator/indicated-speed-kt");
+                        AirSpeed = (client.Read());
+                        client.Write("get /instrumentation/gps/indicated-altitude-ft");
+                        GPSAlt = (client.Read());
+                        client.Write("get /instrumentation/attitude-indicator/internal-roll-deg");
+                        Roll = (client.Read());
+                        client.Write("get /instrumentation/attitude-indicator/internal-pitch-deg");
+                        Pitch = (client.Read());
+                        client.Write("get /instrumentation/altimeter/indicated-altitude-ft");
+                        AltimeterAlt = (client.Read());
+                        client.Write("get /position/latitude-deg");
+                        Latitude = (client.Read());
+                        client.Write("get /position/longitude-deg");
+                        Longitude = (client.Read());
                         NotifyPropertyChanged("Location");
                         mtx.ReleaseMutex();
                         Thread.Sleep(250);
@@ -320,7 +320,7 @@ namespace FlightSimulatorApp
                 {
                     if (Connected)
                     {
-                        disconnect();
+                        Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                     }
@@ -328,21 +328,21 @@ namespace FlightSimulatorApp
                 }
                 catch (ArgumentNullException e)
                 {
-                    disconnect();
+                    Disconnect();
                     Message = "Server terminated unexpectedly.";
                     MessageInd = true;
                     mtx.ReleaseMutex();
                 }
                 catch (SocketException e)
                 {
-                    disconnect();
+                    Disconnect();
                     Message = "Server terminated unexpectedly.";
                     MessageInd = true;
                     mtx.ReleaseMutex();
                 }
                 catch (IOException e)
                 {
-                    disconnect();
+                    Disconnect();
                     if (e.Message.Contains("connected party did not properly respond after a period of time"))
                     {
                         Message = "Server timed out. Disconnected";
@@ -372,48 +372,48 @@ namespace FlightSimulatorApp
                     try
                     {
                         String command = this.setCommands.Dequeue();
-                        client.write(command);
-                        client.read();
+                        client.Write(command);
+                        client.Read();
                         mtx.ReleaseMutex();
                     }
                     catch (InvalidOperationException e)
                     {
-                        disconnect();
+                        Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
                     catch (ArgumentNullException e)
                     {
-                        disconnect();
+                        Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
                     catch (SocketException e)
                     {
-                        disconnect();
+                        Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
                     catch (TimeoutException e)
                     {
-                        disconnect();
+                        Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
                     catch (ArgumentException e)
                     {
-                        disconnect();
+                        Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
                     catch (IOException e)
                     {
-                        disconnect();
+                        Disconnect();
                         if (e.Message.Contains("connected party did not properly respond after a period of time"))
                         {
                             Message = "Server timed out. Disconnected";
@@ -522,7 +522,7 @@ namespace FlightSimulatorApp
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-        public void resetDashboard()
+        public void ResetDashboard()
         {
             Heading = "0";
             VerticalSpeed = "0";
