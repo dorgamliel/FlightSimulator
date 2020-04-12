@@ -31,7 +31,5 @@ namespace FlightSimulatorApp
         double Aileron { get; set; }
         double Rudder { get; set; }
         double Elevator { get; set; }
-
-
     }
 }
