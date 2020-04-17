@@ -36,8 +36,6 @@ namespace FlightSimulatorApp
         private bool connected = false;
         private bool messageInd = false;
         private Queue<String> setCommands;
-        private string ip;
-        private int port;
 
         public MyFlightSimulator(ITelnetClient client)
         {
@@ -258,7 +256,7 @@ namespace FlightSimulatorApp
                 MessageInd = true;
                 Message = "Connected to server.";
                 Connected = true;
-            } catch (Exception e)
+            } catch (Exception)
             {
                 MessageInd = true;
                 Connected = false;
@@ -316,7 +314,7 @@ namespace FlightSimulatorApp
                         Thread.Sleep(250);
                     }
                 }
-                catch (InvalidOperationException e)
+                catch (InvalidOperationException)
                 {
                     if (Connected)
                     {
@@ -326,14 +324,14 @@ namespace FlightSimulatorApp
                     }
                     mtx.ReleaseMutex();
                 }
-                catch (ArgumentNullException e)
+                catch (ArgumentNullException)
                 {
                     Disconnect();
                     Message = "Server terminated unexpectedly.";
                     MessageInd = true;
                     mtx.ReleaseMutex();
                 }
-                catch (SocketException e)
+                catch (SocketException)
                 {
                     Disconnect();
                     Message = "Server terminated unexpectedly.";
@@ -376,35 +374,35 @@ namespace FlightSimulatorApp
                         client.Read();
                         mtx.ReleaseMutex();
                     }
-                    catch (InvalidOperationException e)
+                    catch (InvalidOperationException)
                     {
                         Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
-                    catch (ArgumentNullException e)
+                    catch (ArgumentNullException)
                     {
                         Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
-                    catch (SocketException e)
+                    catch (SocketException)
                     {
                         Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
-                    catch (TimeoutException e)
+                    catch (TimeoutException)
                     {
                         Disconnect();
                         Message = "Server terminated unexpectedly.";
                         MessageInd = true;
                         mtx.ReleaseMutex();
                     }
-                    catch (ArgumentException e)
+                    catch (ArgumentException)
                     {
                         Disconnect();
                         Message = "Server terminated unexpectedly.";
@@ -426,92 +424,6 @@ namespace FlightSimulatorApp
                         mtx.ReleaseMutex();
                     }
                 }
-
-
-
-
-                /*
-                mtx.WaitOne();
-                if (!Connected)
-                {
-                    mtx.ReleaseMutex();
-                    return;
-                }
-
-                try
-                {
-
-                    propName = propName.ToUpper();
-                    PropName prop = (PropName)Enum.Parse(typeof(PropName), propName);
-                    switch (prop)
-                    {
-                        case PropName.THROTTLE:
-                            client.write("set /controls/engines/current-engine/throttle " + val.ToString());
-                            client.read();
-                            mtx.ReleaseMutex();
-                            break;
-                        case PropName.AILERON:
-                            client.write("set /controls/flight/aileron " + val.ToString());
-                            client.read();
-                            mtx.ReleaseMutex();
-                            break;
-                        case PropName.RUDDER:
-                            client.write("set /controls/flight/rudder " + val.ToString());
-                            client.read();
-                            mtx.ReleaseMutex();
-                            break;
-                        case PropName.ELEVATOR:
-                            client.write("set /controls/flight/elevator " + val.ToString());
-                            client.read();
-                            mtx.ReleaseMutex();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                catch (InvalidOperationException e)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
-                catch (ArgumentNullException e)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
-                catch (SocketException e)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
-                catch (TimeoutException e)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
-                catch (ArgumentException e)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
-                catch (IOException)
-                {
-                    disconnect();
-                    Message = "Server terminated unexpectedly.";
-                    MessageInd = true;
-                    mtx.ReleaseMutex();
-                }
-                */
             }).Start();
         }
 
@@ -524,6 +436,9 @@ namespace FlightSimulatorApp
         }
         public void ResetDashboard()
         {
+            Longitude = "0";
+            Latitude = "0";
+            Location = new Location(Double.Parse(Latitude), Double.Parse(Longitude));
             Heading = "0";
             VerticalSpeed = "0";
             GroundSpeed = "0";

@@ -37,20 +37,20 @@ namespace FlightSimulatorApp.UserControls
                     dialog.ShowDialog();
                     if (dialog.IP == null || dialog.Port == null) //? if exited from dialog ?
                         return;
-                    vm.VM_Connect(dialog.IP, Int32.Parse(dialog.Port));
+                    vm.VMConnect(dialog.IP, Int32.Parse(dialog.Port));
                 }
                 else
-                    vm.VM_Disconnect();
+                    vm.VMDisconnect();
             }
             //Using default settings.
             else if ((string)Connect.Content == "Connect")
             {
                 int defaultPort = Int32.Parse(ConfigurationManager.AppSettings["port"].ToString());
                 string defaultIP = ConfigurationManager.AppSettings["ip"].ToString();
-                vm.VM_Connect(defaultIP, defaultPort);
+                vm.VMConnect(defaultIP, defaultPort);
             }
             else
-                vm.VM_Disconnect();
+                vm.VMDisconnect();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace FlightSimulatorApp
             this.simulator = fs;
             simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_" + e.PropertyName);
+                NotifyPropertyChanged("VM" + e.PropertyName);
             };
 
         }
@@ -27,43 +27,43 @@ namespace FlightSimulatorApp
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public string VM_Heading
+        public string VMHeading
         {
             get { return simulator.Heading; }
         }
-        public string VM_VerticalSpeed
+        public string VMVerticalSpeed
         {
             get { return simulator.VerticalSpeed; }
         }
-        public string VM_GroundSpeed
+        public string VMGroundSpeed
         {
             get { return simulator.GroundSpeed; }
         }
-        public string VM_AirSpeed
+        public string VMAirSpeed
         {
             get { return simulator.AirSpeed; }
         }
-        public string VM_GPSAlt
+        public string VMGPSAlt
         {
             get { return simulator.GPSAlt; }
         }
-        public string VM_Roll
+        public string VMRoll
         {
             get { return simulator.Roll; }
         }
-        public string VM_Pitch
+        public string VMPitch
         {
             get { return simulator.Pitch; }
         }
-        public string VM_AltimeterAlt
+        public string VMAltimeterAlt
         {
             get { return simulator.AltimeterAlt; }
         }
-        public bool VM_MessageInd
+        public bool VMMessageInd
         {
             get { return simulator.MessageInd; }
         }
-        public string VM_Message
+        public string VMMessage
         {
             get { return simulator.Message; }
         }

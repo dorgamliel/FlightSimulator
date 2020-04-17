@@ -15,7 +15,7 @@
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Setter Property="Content" Value="Connect"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding VM_Connected}" Value="true">
+                            <DataTrigger Binding="{Binding VMConnected}" Value="true">
                                 <Setter Property="Content" Value="Disconnect"/>
                             </DataTrigger>
                         </Style.Triggers>
