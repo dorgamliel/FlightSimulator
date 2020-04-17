@@ -33,7 +33,6 @@ namespace FlightSimulatorApp
             Byte[] data = new Byte[256];
             Int32 bytes = stream.Read(data, 0, data.Length);
             responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-            Console.WriteLine("Received: {0}", responseData);
             return responseData;
         }
         //Writing to server.
@@ -44,7 +43,6 @@ namespace FlightSimulatorApp
             Byte[] data = System.Text.Encoding.ASCII.GetBytes(command);
             NetworkStream stream = myClient.GetStream();
             stream.Write(data, 0, data.Length);
-            Console.WriteLine("Sent: {0}", command);
         }
     }
 }
