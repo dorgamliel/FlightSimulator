@@ -18,7 +18,7 @@ namespace FlightSimulatorApp
             this.simulator = sim;
             simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_" + e.PropertyName);
+                NotifyPropertyChanged("VM" + e.PropertyName);
             };
         }
 
@@ -28,16 +28,16 @@ namespace FlightSimulatorApp
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        public string VM_Latitude
+        public string VMLatitude
         {
             get { return simulator.Latitude; }
         }
-        public string VM_Longitude
+        public string VMLongitude
         {
             get { return simulator.Longitude; }
         }
 
-        public Location VM_Location
+        public Location VMLocation
         {
             get
             {

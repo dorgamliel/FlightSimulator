@@ -19,7 +19,7 @@ namespace FlightSimulatorApp.View_Models
             this.simulator = fs;
             simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_" + e.PropertyName);
+                NotifyPropertyChanged("VM" + e.PropertyName);
             };
 
         }
@@ -29,15 +29,15 @@ namespace FlightSimulatorApp.View_Models
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-        public bool VM_MessageInd
+        public bool VMMessageInd
         {
             get { return simulator.MessageInd; }
         }
-        public string VM_Message
+        public string VMMessage
         {
             get { return simulator.Message; }
         }
-        public bool VM_Connected
+        public bool VMConnected
         {
             get { return simulator.Connected; }
         }

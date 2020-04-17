@@ -16,7 +16,7 @@ namespace FlightSimulatorApp
             this.simulator = fs;
             simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_" + e.PropertyName);
+                NotifyPropertyChanged("VM" + e.PropertyName);
             };
 
         }
@@ -25,35 +25,35 @@ namespace FlightSimulatorApp
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public double VM_Throttle
+        public double VMThrottle
         {
             set
             {
                 simulator.Throttle = value;
             }
         }
-        public double VM_Aileron
+        public double VMAileron
         {
             set
             {
                 simulator.Aileron = value;
             }
         }
-        public double VM_Rudder
+        public double VMRudder
         {
             set
             {
                 simulator.Rudder = value;
             }
         }
-        public double VM_Elevator
+        public double VMElevator
         {
             set
             {
                 simulator.Elevator = value;
             }
         }
-        public bool VM_MessageInd
+        public bool VMMessageInd
         {
             get { return simulator.MessageInd; }
         }

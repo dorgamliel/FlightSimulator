@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <m:Map x:Name="map" CredentialsProvider="JLx9WovYO4EXlN3HBVqS~vg5tR51fYAhhHBcrWzsiWg~AibXYJKaZSgGhSViyEthBamV_VIYH1E9NZ8EWIr89kxDDqoE_7pTjNFdh8IxUWEX" Mode="Aerial" ZoomLevel="13" Center="32.0055, 34.8854" Grid.RowSpan="6" Margin="0,0,0,-0.334">
             <Grid Width="50" Height="80" 
-              m:MapLayer.Position="{Binding VM_Location}" m:MapLayer.PositionOrigin="Center">
+              m:MapLayer.Position="{Binding VMLocation}" m:MapLayer.PositionOrigin="Center">
                 <Image Source="resources/plane.png">
                 </Image>
             </Grid>
@@ -27,35 +27,35 @@
         <StackPanel Grid.Column="1" x:Name="dash">
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Heading (deg):</TextBlock>
-                <TextBlock Text="{Binding VM_Heading}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMHeading}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Vertical Speed:</TextBlock>
-                <TextBlock Text="{Binding VM_VerticalSpeed}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMVerticalSpeed}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Ground Speed (kt):</TextBlock>
-                <TextBlock Text="{Binding VM_GroundSpeed}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMGroundSpeed}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Airspeed (kt):</TextBlock>
-                <TextBlock Text="{Binding VM_AirSpeed}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMAirSpeed}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">GPS Altitude (ft):</TextBlock>
-                <TextBlock Text="{Binding VM_GPSAlt}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMGPSAlt}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Roll (deg):</TextBlock>
-                <TextBlock Text="{Binding VM_Roll}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMRoll}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10">Pitch (deg):</TextBlock>
-                <TextBlock Text="{Binding VM_Pitch}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMPitch}" FontSize="10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="33">
                 <TextBlock FontSize="10" Padding="10" Margin="0,0,0,-0.333">Altimeter Altitude (ft):</TextBlock>
-                <TextBlock Text="{Binding VM_AltimeterAlt}" FontSize="10" Padding="10"/>
+                <TextBlock Text="{Binding VMAltimeterAlt}" FontSize="10" Padding="10"/>
             </StackPanel>
         </StackPanel>
         <Views:MyControls x:Name="controllers" Grid.Row="1" Grid.Column="2"/>
@@ -65,12 +65,12 @@
                     <DoubleAnimation From="-17" To="0" Storyboard.TargetProperty="(Canvas.Top)"  FillBehavior="Stop"/>
                 </Storyboard>
             </Canvas.Resources>
-            <TextBlock x:Name="alert" Text="{Binding VM_Message}" Margin="10,0,0,0" Background="LightYellow" Width="auto" VerticalAlignment="Top" Height="17">
+            <TextBlock x:Name="alert" Text="{Binding VMMessage}" Margin="10,0,0,0" Background="LightYellow" Width="auto" VerticalAlignment="Top" Height="17">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=VM_MessageInd, IsAsync=True}" Value="true">
+                            <DataTrigger Binding="{Binding Path=VMMessageInd, IsAsync=True}" Value="true">
                                 <Setter Property="Visibility" Value="Visible"/>
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource Appearance}">

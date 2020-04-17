@@ -18,7 +18,7 @@ namespace FlightSimulatorApp
             this.simulator = fs;
             simulator.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e)
             {
-                NotifyPropertyChanged("VM_" + e.PropertyName);
+                NotifyPropertyChanged("VM" + e.PropertyName);
             };
 
         }
@@ -27,17 +27,17 @@ namespace FlightSimulatorApp
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
-        public void VM_Connect(string ip, int port)
+        public void VMConnect(string ip, int port)
         {
             simulator.Connect(ip, port);
-            if (VM_Connected)
+            if (VMConnected)
                 simulator.Start();
         }
-        public void VM_Disconnect()
+        public void VMDisconnect()
         {
             simulator.Disconnect();
         }
-        public bool VM_Connected
+        public bool VMConnected
         {
             get { return simulator.Connected; }
         }
