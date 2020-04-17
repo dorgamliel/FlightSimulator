@@ -27,19 +27,20 @@ namespace FlightSimulatorApp.UserControls
         {
             InitializeComponent();
         }
+        //Clicking joystick knob with mouse.
         private void Knob_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(Knob);
             mousePressed = true;
         }
-
+        //Knob actions after user releases it.
         private void centerKnob_Completed(object sender, EventArgs e)
         {
             Storyboard sb = (Storyboard)Knob.FindResource("CenterKnob");
             sb.Stop();
             ResetKnobPosition();
         }
-
+        //Moving mouse on joystick knob.
         private void Knob_MouseMove(object sender, MouseEventArgs e)
         {
             if (mousePressed)
@@ -67,6 +68,7 @@ namespace FlightSimulatorApp.UserControls
                 Y = - (knobPosition.Y / (innerCircle.ActualHeight / 2));
             }
         }
+        //Releasing mouse click on joystick knob.
         private void Knob_MouseUp(object sender, MouseButtonEventArgs e)
         {
             mousePressed = false;
@@ -76,14 +78,7 @@ namespace FlightSimulatorApp.UserControls
             Storyboard sb = (Storyboard)Knob.FindResource("CenterKnob");
             sb.Begin();
         }
-        public double LineLength(double x, double y, double x1, double y1)
-        {
-            return Math.Sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
-        }
-        public double GetAngle(double x, double y, double x1, double y1)
-        {
-            return -Math.Atan2(y1 - y, x1 - x);
-        }
+        //Resets knob position.
         private void ResetKnobPosition()
         {
             knobPosition.X = 0;
@@ -91,31 +86,33 @@ namespace FlightSimulatorApp.UserControls
             X = knobPosition.X;
             Y = knobPosition.Y;
         }
-        
+        //Gets two point-like values, and returns line length between them.
+        public double LineLength(double x, double y, double x1, double y1)
+        {
+            return Math.Sqrt((x1 - x) * (x1 - x) + (y1 - y) * (y1 - y));
+        }
+        //Returns angle between two points and a plane.
+        public double GetAngle(double x, double y, double x1, double y1)
+        {
+            return -Math.Atan2(y1 - y, x1 - x);
+        }  
+        //X axis property.
         public double X
         {
             get { return (double)GetValue(XProperty); }
             set { SetValue(XProperty, value); }
         }
-        
         // Using a DependencyProperty as the backing store for X.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty XProperty =
             DependencyProperty.Register("X", typeof(double), typeof(Joystick));
-
-
-
+        //Y axis property.
         public double Y
         {
             get { return (double)GetValue(YProperty); }
             set { SetValue(YProperty, value); }
         }
-
         // Using a DependencyProperty as the backing store for Y.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty YProperty =
             DependencyProperty.Register("Y", typeof(double), typeof(Joystick));
-
-
-
-
     }
 }

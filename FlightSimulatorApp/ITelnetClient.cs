@@ -8,10 +8,13 @@ namespace FlightSimulatorApp
 {
     interface ITelnetClient
     {
-        //connection to simulator.
+        //Connection to simulator.
         void Connect(string ip, int port);
+        //Disconnection from simulator.
         void Disconnect();
+        //Writing to simulator.
         void Write(string command);
+        //Reading from simulator.
         string Read();
     }
 }
