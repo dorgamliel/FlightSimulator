@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace FlightSimulatorApp
 {
     enum PropName { THROTTLE, AILERON, RUDDER, ELEVATOR}
+    //This class describes the interaction with FlightSimulator
     class MyFlightSimulator : IFlightSimulator
     {
         private ITelnetClient client;
@@ -37,6 +38,7 @@ namespace FlightSimulatorApp
         private bool messageInd = false;
         private Queue<String> setCommands;
 
+        //Constructor for MyFlightSimulator.
         public MyFlightSimulator(ITelnetClient client)
         {
             this.client = client;
@@ -246,7 +248,7 @@ namespace FlightSimulatorApp
                 NotifyPropertyChanged("Connected");
             }
         }
-
+        //Connection to server.
         public void Connect(string ip, int port)
         {
             client = new MyTelnetClient();
@@ -264,7 +266,7 @@ namespace FlightSimulatorApp
             }
             
         }
-
+        //Disconnection from server.
         public void Disconnect()
         {
             if (!Connected)
@@ -278,11 +280,13 @@ namespace FlightSimulatorApp
             Connected = false;
             Message = "Disconnected from server.";
         }
-
+        //Starting sending and receiving data with server.
         public void Start()
         {
+            //Send and receive data in new threads.
             new Thread(delegate ()
             {
+                //Set commands
                 StartClient();
                 try
                 {
@@ -354,7 +358,7 @@ namespace FlightSimulatorApp
                 }
             }).Start();
         }
-
+        //Sending set commands to server.
         public void StartClient()
         {
             new Thread(delegate ()
@@ -426,7 +430,7 @@ namespace FlightSimulatorApp
                 }
             }).Start();
         }
-
+        //Notify property changed method.
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -434,6 +438,7 @@ namespace FlightSimulatorApp
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+        //Resets dashbord to zeros.
         public void ResetDashboard()
         {
             Longitude = "0";

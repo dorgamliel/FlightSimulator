@@ -10,6 +10,7 @@ namespace FlightSimulatorApp
     class MyTelnetClient : ITelnetClient
     {
         private TcpClient myClient = new TcpClient();
+        //Connection to server.
         public void Connect(string ip, int port)
         {
             myClient = new TcpClient();
@@ -18,12 +19,12 @@ namespace FlightSimulatorApp
             if (!myClient.ConnectAsync(ip, port).Wait(1000))
                 throw new Exception();
         }
-
+        //Dinsonnection from server.
         public void Disconnect()
         {
             myClient.Close();
         }
-
+        //Reading from server.
         public string Read()
         {
             //TODO: remove printing to console
@@ -35,7 +36,7 @@ namespace FlightSimulatorApp
             Console.WriteLine("Received: {0}", responseData);
             return responseData;
         }
-
+        //Writing to server.
         public void Write(string command)
         {
             //TODO: remove printing to console

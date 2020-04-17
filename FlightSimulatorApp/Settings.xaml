@@ -25,7 +25,7 @@
         <TextBlock x:Name="t_port" Text="Port:" FontSize="10" Margin="0,5,0,0" Grid.Row="2" Grid.Column="1"/>
         <TextBox x:Name="b_ip" Grid.Row="1" Grid.Column="2"  Margin="20,1,0,1" BorderThickness="0.5"/>
         <TextBox x:Name="b_port" Grid.Row="2" Grid.Column="2" Margin="20,1,0,2" BorderThickness="0.5"/>
-        <Button x:Name="ok" Content="OK" Grid.Column="3" Grid.Row="2" Width="70" HorizontalAlignment="Right" Margin="0,0,1,1" Click="ok_Click"/>
+        <Button x:Name="ok" Content="OK" Grid.Column="3" Grid.Row="2" Width="70" HorizontalAlignment="Right" Margin="0,0,1,1" Click="OK_Click"/>
         <TextBlock x:Name="blankArea" Grid.Column="3" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="Red" FontSize="8"/>
     </Grid>
 </Window>

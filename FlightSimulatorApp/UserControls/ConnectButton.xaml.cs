@@ -25,6 +25,7 @@ namespace FlightSimulatorApp.UserControls
         {
             InitializeComponent();
         }
+        //Method for clicking connection button.
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
             var vm = (ConnectionViewModel)this.DataContext;
