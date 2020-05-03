@@ -6,10 +6,9 @@ Third milestone
 _Contributors_: Alonsho, dorgamliel.  
 [link](https://github.com/Alonsho/MileStone1) to our GitHub repository.
 
-**Milestone description:** In this milestone, the main focus is building a desktop app, which communicates with a dummy server (mimics the actual simulator's behavoir).
-, a detailed dashboard with real-time plane data.
+**Milestone description:** In this milestone, the main focus is building a desktop app, which communicates with a dummy server (mimics the actual simulator's behavoir), and a detailed dashboard with real-time plane data.
 
-**What is included?**
+**What's included?**
 This app consists of three main components:
 1. Controllers - Controlling the plane is now simple with navigation controllers, including throttle, aileron, elevator and rudder
 2. Dashbaord - a detailed dashboard with real-time plane data.
