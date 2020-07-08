@@ -6,7 +6,7 @@ Third milestone
 _Contributors_: Alonsho, dorgamliel.  
 [link](https://github.com/Alonsho/MileStone1) to our GitHub repository.
 
-**Milestone description:** In this milestone, the main focus is building a desktop app, which communicates with a dummy server (mimics the actual simulator's behavoir), and a detailed dashboard with real-time plane data.
+**Description:** WPF desktop application communicating with [FlightGear](https://www.flightgear.org/download/), showing aircraft location and flight data, and allows control of some aircraf controls.
 
 **What's included?**
 This app consists of three main components:
