@@ -17,3 +17,6 @@ Combining these three main components (and some extra tweaks), this app is whole
 
 
 **An important remark:** As written above, this project is in the making. All of the description above relates to the current milestone.
+
+App preview:
+![image](https://user-images.githubusercontent.com/47919011/112353061-0a60bf00-8cd4-11eb-8eaf-5e5e7dd6a560.png)
